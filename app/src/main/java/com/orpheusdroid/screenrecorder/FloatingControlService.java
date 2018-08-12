@@ -43,16 +43,46 @@ import android.widget.LinearLayout;
 import com.orpheusdroid.screenrecorder.Const.RecordingState;
 
 /**
- * Created by vijai on 05-11-2016.
+ * Service to handle floating controls
+ * <p>
+ *     A service class to manage floating controls (start/pause/stop)
+ *     <br /> Pause is not available on all the devices
+ * </p>
+ *
+ * @author Vijai Chandra Prasad .R
  */
-
 public class FloatingControlService extends Service implements View.OnClickListener {
 
+    /**
+     * WindowManager instance for handling floating controls
+     */
     private WindowManager windowManager;
+
+    /**
+     * Floating controls layout
+     */
     private LinearLayout floatingControls;
+
+    /**
+     * View which holds the floating controls
+     */
     private View controls;
+
+    /**
+     * pause button for floating controls
+     */
     private ImageButton pauseIB;
+
+    /**
+     * Resume button for floating controls
+     */
     private ImageButton resumeIB;
+
+    /**
+     * ServiceBinder instance
+     *
+     * @see ServiceBinder
+     */
     private IBinder binder = new ServiceBinder();
 
     @Override
@@ -157,7 +187,9 @@ public class FloatingControlService extends Service implements View.OnClickListe
         return START_STICKY;
     }
 
-    //Expand the floating window on touch
+    /**
+     * Expand the floating window on touch of the logo
+     */
     private void expandFloatingControls() {
         controls.setVisibility(View.VISIBLE);
 
@@ -170,6 +202,9 @@ public class FloatingControlService extends Service implements View.OnClickListe
         mAnimator.start();
     }
 
+    /**
+     * Collapse the floating control if expanded
+     */
     private void collapseFloatingControls() {
         int finalHeight = controls.getWidth();
 
@@ -238,30 +273,39 @@ public class FloatingControlService extends Service implements View.OnClickListe
         vibrate.vibrate(100);
     }
 
-    /* Set resume intent and start the recording service
+    /**
+     * Set resume intent and start the recording service
      * NOTE: A service can be started only once. Any subsequent startService only passes the intent
-     * if any by calling onStartCommand */
+     * if any by calling onStartCommand
+     */
     private void resumeScreenRecording() {
         Intent resumeIntent = new Intent(this, RecorderService.class);
         resumeIntent.setAction(Const.SCREEN_RECORDING_RESUME);
         startService(resumeIntent);
     }
 
-    // Set pause intent and start the recording service
+    /**
+     * Set pause intent and start the recording service
+     */
     private void pauseScreenRecording() {
         Intent pauseIntent = new Intent(this, RecorderService.class);
         pauseIntent.setAction(Const.SCREEN_RECORDING_PAUSE);
         startService(pauseIntent);
     }
 
-    // Set stop intent and start the recording service
+    /**
+     * Set stop intent and start the recording service
+     */
     private void stopScreenSharing() {
         Intent stopIntent = new Intent(this, RecorderService.class);
         stopIntent.setAction(Const.SCREEN_RECORDING_STOP);
         startService(stopIntent);
     }
 
-    //Enable/disable pause/resume ImageButton depending on the current recording state
+    /**
+     * Enable/disable pause/resume ImageButton depending on the current recording state
+     * @param state {@link RecordingState}
+     */
     public void setRecordingState(RecordingState state) {
         switch (state) {
             case PAUSED:
@@ -297,13 +341,19 @@ public class FloatingControlService extends Service implements View.OnClickListe
         return super.onUnbind(intent);
     }
 
-    //Method to convert dp to px
+    /**
+     * Method to convert dp to px
+     * @param dp int
+     * @return int
+     */
     private int dpToPx(int dp) {
         DisplayMetrics displayMetrics = this.getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
-    //Binder class for binding to recording service
+    /**
+     * Binder class for binding to recording service
+     */
     public class ServiceBinder extends Binder {
         FloatingControlService getService() {
             return FloatingControlService.this;
