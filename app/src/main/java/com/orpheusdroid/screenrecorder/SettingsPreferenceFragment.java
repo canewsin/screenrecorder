@@ -145,8 +145,8 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         theme.setSummary(theme.getEntry());
 
         //Set the summary of preferences dynamically with user choice or default if no user choice is made
-        updateScreenAspectRatio();
         updateResolution(res);
+        updateScreenAspectRatio();
         fps.setSummary(getValue(getString(R.string.fps_key), "30"));
         float bps = bitsToMb(Integer.parseInt(getValue(getString(R.string.bitrate_key), "7130317")));
         bitrate.setSummary(bps + " Mbps");
@@ -177,7 +177,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
      * @param pref object of the resolution ListPreference
      */
     private void updateResolution(ListPreference pref) {
-        pref.setSummary(getValue(getString(R.string.res_key), getNativeRes()));
+        String resolution = getValue(getString(R.string.res_key), getNativeRes());
+        if (resolution.toLowerCase().contains("x"))
+            resolution = getNativeRes();
+        pref.setSummary(resolution + "P");
     }
 
     /**
@@ -187,43 +190,46 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
      */
     private String getNativeRes() {
         DisplayMetrics metrics = getRealDisplayMetrics();
-        return getScreenWidth(metrics) + "x" + getScreenHeight(metrics);
+        return String.valueOf(getScreenWidth(metrics));
     }
 
     /**
      * Updates the available resolution based on aspect ratio
      */
     private void updateScreenAspectRatio() {
-        Const.ASPECT_RATIO aspect_ratio = getAspectRatio();
-        Log.d(Const.TAG, "Aspect ratio: " + aspect_ratio);
-        CharSequence[] entriesValues = getResolutionEntriesValues(aspect_ratio);
-        res.setEntries(entriesValues);
+        CharSequence[] entriesValues = getResolutionEntriesValues();
+        res.setEntries(getResolutionEntries(entriesValues));
+        //res.setEntries(entriesValues);
         res.setEntryValues(entriesValues);
     }
 
     /**
      * Get resolutions based on the device's aspect ratio
      *
-     * @param aspectRatio {@link com.orpheusdroid.screenrecorder.Const.ASPECT_RATIO} of the device
      * @return entries for the resolution
      */
-    private CharSequence[] getResolutionEntriesValues(Const.ASPECT_RATIO aspectRatio) {
+    private CharSequence[] getResolutionEntriesValues() {
 
-        ArrayList<String> entries;
-        switch (aspectRatio) {
-            case AR16_9:
-                entries = buildEntries(R.array.resolutionsArray_16_9);
-                break;
-            case AR18_9:
-                entries = buildEntries(R.array.resolutionValues_18_9);
-                break;
-            default:
-                entries = buildEntries(R.array.resolutionsArray_16_9);
-                break;
+        ArrayList<String> entrieValues = buildEntries(R.array.resolutionValues);
+
+        String[] entriesArray = new String[entrieValues.size()];
+        return entrieValues.toArray(entriesArray);
+    }
+
+    private CharSequence[] getResolutionEntries(CharSequence[] entriesValues) {
+        ArrayList<String> entries = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.resolutionsArray)));
+        ArrayList<String> newEntries = new ArrayList<>();
+        for (CharSequence values : entriesValues) {
+            Log.d(Const.TAG, "res entries:" + values.toString());
+            for (String entry : entries) {
+                if (entry.contains(values))
+                    newEntries.add(entry);
+            }
+            Log.d(Const.TAG, "res entries: split " + values.toString().split("P")[0] + " val: ");
         }
-
-        String[] entriesArray = new String[entries.size()];
-        return entries.toArray(entriesArray);
+        Log.d(Const.TAG, "res entries" + newEntries.toString());
+        String[] entriesArray = new String[newEntries.size()];
+        return newEntries.toArray(entriesArray);
     }
 
     /**
@@ -234,20 +240,17 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
      */
     private ArrayList<String> buildEntries(int resID) {
         DisplayMetrics metrics = getRealDisplayMetrics();
-        int width = getScreenWidth(metrics);
-        int height = getScreenHeight(metrics);
-        String nativeRes = width + "x" + height;
+        int deviceWidth = getScreenWidth(metrics);
         ArrayList<String> entries = new ArrayList<>(Arrays.asList(getResources().getStringArray(resID)));
         Iterator<String> entriesIterator = entries.iterator();
         while (entriesIterator.hasNext()) {
-            String entry = entriesIterator.next();
-            String[] widthHeight = entry.split("x");
-            if (width < Integer.parseInt(widthHeight[0]) || height < Integer.parseInt(widthHeight[1])) {
+            String width = entriesIterator.next();
+            if (deviceWidth < Integer.parseInt(width)) {
                 entriesIterator.remove();
             }
         }
-        if (!entries.contains(nativeRes))
-            entries.add(nativeRes);
+        if (!entries.contains("" + deviceWidth))
+            entries.add("" + deviceWidth);
         return entries;
     }
 
@@ -287,6 +290,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
     /**
      * Get aspect ratio of the screen
      */
+    @Deprecated
     private Const.ASPECT_RATIO getAspectRatio() {
         float screen_width = getScreenWidth(getRealDisplayMetrics());
         float screen_height = getScreenHeight(getRealDisplayMetrics());

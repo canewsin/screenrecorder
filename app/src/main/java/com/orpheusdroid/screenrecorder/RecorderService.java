@@ -84,13 +84,14 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     private static int BITRATE;
     private static boolean mustRecAudio;
     private static String SAVEPATH;
-
     static {
-        ORIENTATIONS.append(Surface.ROTATION_0, 90);
-        ORIENTATIONS.append(Surface.ROTATION_90, 0);
-        ORIENTATIONS.append(Surface.ROTATION_180, 270);
-        ORIENTATIONS.append(Surface.ROTATION_270, 180);
+        ORIENTATIONS.append(Surface.ROTATION_0, 0);
+        ORIENTATIONS.append(Surface.ROTATION_90, 90);
+        ORIENTATIONS.append(Surface.ROTATION_180, 180);
+        ORIENTATIONS.append(Surface.ROTATION_270, 270);
     }
+
+    private int screenOrientation;
 
     private boolean isRecording;
     private boolean useFloatingControls;
@@ -150,10 +151,12 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                   * Request: https://code.google.com/p/android/issues/detail?id=800 */
                 if (!isRecording) {
                     //Get values from Default SharedPreferences
-                    getValues();
+                    //screenOrientation = intent.getIntExtra(Const.SCREEN_ORIENTATION, 0);
+                    screenOrientation = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
                     data = intent.getParcelableExtra(Const.RECORDER_INTENT_DATA);
                     result = intent.getIntExtra(Const.RECORDER_INTENT_RESULT, Activity.RESULT_OK);
 
+                    getValues();
                     // Check if an app has to be started before recording and start the app
                     if (prefs.getBoolean(getString(R.string.preference_enable_target_app_key), false))
                         startAppBeforeRecording(prefs.getString(getString(R.string.preference_app_chooser_key), "none"));
@@ -383,9 +386,8 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             mMediaRecorder.setVideoEncodingBitRate(BITRATE);
             mMediaRecorder.setVideoFrameRate(FPS);
-            int rotation = window.getDefaultDisplay().getRotation();
-            int orientation = ORIENTATIONS.get(rotation + 90);
-            mMediaRecorder.setOrientationHint(orientation);
+            int orientation = (360 - ORIENTATIONS.get(screenOrientation)) % 360;
+            //mMediaRecorder.setOrientationHint(orientation);
             mMediaRecorder.prepare();
         } catch (IOException e) {
             e.printStackTrace();
@@ -519,7 +521,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
 
     //Get user's choices for user choosable settings
     public void getValues() {
-        String res = prefs.getString(getString(R.string.res_key), getResolution());
+        String res = getResolution();
         setWidthHeight(res);
         FPS = Integer.parseInt(prefs.getString(getString(R.string.fps_key), "30"));
         BITRATE = Integer.parseInt(prefs.getString(getString(R.string.bitrate_key), "7130317"));
@@ -540,8 +542,14 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     * WIDTH x HEIGHT. Lets split the string on 'x' and retrieve width and height */
     private void setWidthHeight(String res) {
         String[] widthHeight = res.split("x");
-        WIDTH = Integer.parseInt(widthHeight[0]);
-        HEIGHT = Integer.parseInt(widthHeight[1]);
+        if (screenOrientation == 0 || screenOrientation == 2) {
+            WIDTH = Integer.parseInt(widthHeight[0]);
+            HEIGHT = Integer.parseInt(widthHeight[1]);
+        } else {
+            HEIGHT = Integer.parseInt(widthHeight[0]);
+            WIDTH = Integer.parseInt(widthHeight[1]);
+        }
+        Log.d(Const.TAG, "Width: " + WIDTH + ",Height:" + HEIGHT);
     }
 
     //Get the device resolution in pixels
@@ -551,8 +559,22 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         window.getDefaultDisplay().getMetrics(metrics);
         DENSITY_DPI = metrics.densityDpi;
         int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
-        return width + "x" + height;
+        width = Integer.parseInt(prefs.getString(getString(R.string.res_key), Integer.toString(width)));
+        String res = width + "x" + (int) (width * getAspectRatio(metrics));
+        Log.d(Const.TAG, "resolution service: " + res + " rot: " + screenOrientation);
+        return res;
+    }
+
+    private float getAspectRatio(DisplayMetrics metrics) {
+        float screen_width = metrics.widthPixels;
+        float screen_height = metrics.heightPixels;
+        float aspectRatio;
+        if (screen_width > screen_height) {
+            aspectRatio = screen_width / screen_height;
+        } else {
+            aspectRatio = screen_height / screen_width;
+        }
+        return aspectRatio;
     }
 
     //Return filename of the video to be saved formatted as chosen by the user

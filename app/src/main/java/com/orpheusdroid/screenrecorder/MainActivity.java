@@ -336,7 +336,6 @@ public class MainActivity extends AppCompatActivity {
         recorderService.putExtra(Const.RECORDER_INTENT_DATA, data);
         recorderService.putExtra(Const.RECORDER_INTENT_RESULT, resultCode);
         startService(recorderService);
-        this.finish();
     }
 
 

@@ -76,6 +76,7 @@ public class Const {
     static final String SHARE_NOTIFICATION_CHANNEL_NAME = "Notification shown to share or edit the recorded video";
     static final String ANALYTICS_URL = "https://analytics.orpheusdroid.com";
     static final String ANALYTICS_API_KEY = "07273a5c91f8a932685be1e3ad0d160d3de6d4ba";
+    public static final String COUNTLY_USAGE_STATS_GROUP_NAME = "analytics_group";
 
     static final String PREFS_REQUEST_ANALYTICS_PERMISSION = "request_analytics_permission";
     static final String PREFS_LIGHT_THEME = "light_theme";

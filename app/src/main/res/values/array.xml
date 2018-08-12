@@ -25,18 +25,16 @@
         <item>60</item>
     </string-array>
 
-    <string-array name="resolutionsArray_16_9" translatable="false">
-        <item>360x640</item>
-        <item>720x1280</item>
-        <item>1080x1920</item>
-        <item>1440x2560</item>
+    <string-array name="resolutionsArray" translatable="false">
+        <item>720P (HD)</item>
+        <item>1080P (FHD)</item>
+        <item>1440P (QHD)</item>
     </string-array>
 
-    <string-array name="resolutionValues_16_9" translatable="false">
-        <item>360x640</item>
-        <item>720x1280</item>
-        <item>1080x1920</item>
-        <item>1440x2560</item>
+    <string-array name="resolutionValues" translatable="false">
+        <item>720</item>
+        <item>1080</item>
+        <item>1440</item>
     </string-array>
 
     <string-array name="resolutionsArray_18_9" translatable="false">
