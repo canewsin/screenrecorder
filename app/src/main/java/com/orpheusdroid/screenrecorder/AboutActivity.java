@@ -77,7 +77,7 @@ public class AboutActivity extends AppCompatActivity {
         analyticsCredit.setText(getString(R.string.analytics_library_credit, "Countly",
                 "https://github.com/Countly/countly-sdk-android",
                 "MIT Opensource License"));
-        openSourceInfo.setText(getString(R.string.opensource_info, "https://github.com/vijai1996/screenrecorder", "GNU AGPLv3"));
+        openSourceInfo.setText(getString(R.string.opensource_info, "https://gitlab.com/vijai/screenrecorder", "GNU AGPLv3"));
 
         //Let's build the copyright text using String builder
         StringBuilder copyRight = new StringBuilder();

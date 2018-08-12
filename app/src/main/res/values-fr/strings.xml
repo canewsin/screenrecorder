@@ -27,7 +27,7 @@
     <string name="about_credits">Crédits</string>
     <string name="about_libraries">Bibliothèques</string>
     <string name="about_opensource">Open Source</string>
-    <string name="opensource_info">Cette appli est open source and la source est disponible sur \n\nGithub url: %1$s\n\nLicence : %2$s</string>
+    <string name="opensource_info">Cette appli est open source and la source est disponible sur \n\nGitlab url: %1$s\n\nLicence : %2$s</string>
     <string name="fab_record_hint">Lancer l\'enregistrement</string>
     <string name="recording_failed_toast">Échec de l\'enregistrement vidéo.</string>
     <string name="screenrecording_already_active_toast">Une session d\'enregistrement est déjà active</string>

@@ -44,7 +44,7 @@
     Lizenz: %3$s</string>
     <string name="opensource_info">Diese Anwendung ist quelloffen, und der Quellcode kann abgerufen werden unter\n
     \n
-    Github URL: %1$s\n
+    Gitlab URL: %1$s\n
     \n
     Lizenz: %2$s</string>
     <string name="fab_record_hint">Mitschnitt starten</string>

@@ -45,7 +45,7 @@
     <string name="about_credits">Авторство</string>
     <string name="about_libraries">Библиотеки</string>
     <string name="about_opensource">Открытый исходный код</string>
-    <string name="opensource_info">Приложение имеет открытый исходный код, доступный по ссылке: \n\nGithub: %1$s\n\nЛицензия: %2$s</string>
+    <string name="opensource_info">Приложение имеет открытый исходный код, доступный по ссылке: \n\nGitlab: %1$s\n\nЛицензия: %2$s</string>
     <string name="fab_record_hint">Начать запись</string>
     <string name="recording_failed_toast">Запись экрана не удалась</string>
     <string name="screenrecording_already_active_toast">Запись экрана уже ведется</string>
