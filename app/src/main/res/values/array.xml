@@ -37,6 +37,18 @@
         <item>1440</item>
     </string-array>
 
+    <string-array name="orientationEntries" translatable="false">
+        <item>Auto</item>
+        <item>Portrait</item>
+        <item>Landscape</item>
+    </string-array>
+
+    <string-array name="orientationValues" translatable="false">
+        <item>auto</item>
+        <item>portrait</item>
+        <item>landscape</item>
+    </string-array>
+
     <string-array name="resolutionsArray_18_9" translatable="false">
         <item>360x720</item>
         <item>720x1440</item>

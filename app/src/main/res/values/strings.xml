@@ -120,6 +120,9 @@
     <string name="quick_settings_tile_default_title">Add ScreenCam tile</string>
     <string name="quick_settings_tile_start_title">Start recording</string>
     <string name="quick_settings_tile_stop_title">Stop recording</string>
+    <string name="orientation_key" translatable="false">orientation</string>
+    <string name="preference_orientation_summary">Default orientation</string>
+    <string name="preference_orientation_title">Orientation</string>
     <plurals name="delete_alert_title">
         <item quantity="zero">Delete video?</item>
         <item quantity="one">Delete video?</item>

@@ -71,8 +71,8 @@ import java.util.List;
 /**
  * Service to manage recording and notifications
  * <p>
- *     A service class to manage recording (start/pause/stop), handle notifications, manage floating controls
- *     and recording permissions
+ * A service class to manage recording (start/pause/stop), handle notifications, manage floating controls
+ * and recording permissions
  * </p>
  *
  * @author Vijai Chandra Prasad .R
@@ -84,6 +84,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     private static int BITRATE;
     private static boolean mustRecAudio;
     private static String SAVEPATH;
+
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 0);
         ORIENTATIONS.append(Surface.ROTATION_90, 90);
@@ -148,7 +149,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
 
                 /* Wish MediaRecorder had a method isRecording() or similar. But, we are forced to
                  * manage the state ourself. Let's hope the request is honored.
-                  * Request: https://code.google.com/p/android/issues/detail?id=800 */
+                 * Request: https://code.google.com/p/android/issues/detail?id=800 */
                 if (!isRecording) {
                     //Get values from Default SharedPreferences
                     //screenOrientation = intent.getIntExtra(Const.SCREEN_ORIENTATION, 0);
@@ -312,7 +313,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         mMediaProjection.registerCallback(mMediaProjectionCallback, null);
 
         /* Create a new virtual display with the actual default display
-                 * and pass it on to MediaRecorder to start recording */
+         * and pass it on to MediaRecorder to start recording */
         mVirtualDisplay = createVirtualDisplay();
         try {
             mMediaRecorder.start();
@@ -344,9 +345,9 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
             isRecording = false;
         }
 
-                /* Add Pause action to Notification to pause screen recording if the user's android version
-                 * is >= Nougat(API 24) since pause() isnt available previous to API24 else build
-                 * Notification with only default stop() action */
+        /* Add Pause action to Notification to pause screen recording if the user's android version
+         * is >= Nougat(API 24) since pause() isnt available previous to API24 else build
+         * Notification with only default stop() action */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //startTime is to calculate elapsed recording time to update notification during pause/resume
             startTime = System.currentTimeMillis();
@@ -539,15 +540,28 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     }
 
     /* The PreferenceScreen save values as string and we save the user selected video resolution as
-    * WIDTH x HEIGHT. Lets split the string on 'x' and retrieve width and height */
+     * WIDTH x HEIGHT. Lets split the string on 'x' and retrieve width and height */
     private void setWidthHeight(String res) {
         String[] widthHeight = res.split("x");
-        if (screenOrientation == 0 || screenOrientation == 2) {
-            WIDTH = Integer.parseInt(widthHeight[0]);
-            HEIGHT = Integer.parseInt(widthHeight[1]);
-        } else {
-            HEIGHT = Integer.parseInt(widthHeight[0]);
-            WIDTH = Integer.parseInt(widthHeight[1]);
+        String orientationPrefs = prefs.getString(getString(R.string.orientation_key), "auto");
+        switch (orientationPrefs) {
+            case "auto":
+                if (screenOrientation == 0 || screenOrientation == 2) {
+                    WIDTH = Integer.parseInt(widthHeight[0]);
+                    HEIGHT = Integer.parseInt(widthHeight[1]);
+                } else {
+                    HEIGHT = Integer.parseInt(widthHeight[0]);
+                    WIDTH = Integer.parseInt(widthHeight[1]);
+                }
+                break;
+            case "portrait":
+                WIDTH = Integer.parseInt(widthHeight[0]);
+                HEIGHT = Integer.parseInt(widthHeight[1]);
+                break;
+            case "landscape":
+                HEIGHT = Integer.parseInt(widthHeight[0]);
+                WIDTH = Integer.parseInt(widthHeight[1]);
+                break;
         }
         Log.d(Const.TAG, "Width: " + WIDTH + ",Height:" + HEIGHT);
     }
