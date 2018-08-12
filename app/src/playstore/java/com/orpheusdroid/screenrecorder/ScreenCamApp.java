@@ -17,8 +17,6 @@
 
 package com.orpheusdroid.screenrecorder;
 
-import android.app.Application;
-
 import org.solovyev.android.checkout.Billing;
 
 /**
@@ -26,7 +24,7 @@ import org.solovyev.android.checkout.Billing;
  *
  * @author Vijai Chandra Prasad .R
  */
-public class ScreenCamApp extends Application {
+public class ScreenCamApp extends ScreenCamBaseApp {
     private static ScreenCamApp sInstance;
 
     private final Billing mBilling = new Billing(this, new Billing.DefaultConfiguration() {
@@ -46,5 +44,10 @@ public class ScreenCamApp extends Application {
 
     public Billing getBilling() {
         return mBilling;
+    }
+
+    @Override
+    public void setupAnalytics() {
+        super.setupAnalytics();
     }
 }

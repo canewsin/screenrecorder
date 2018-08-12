@@ -217,6 +217,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        if (!BuildConfig.DEBUG)
+            requestAnalyticsPermission();
+
+        Countly.onCreate(this);
     }
 
     /**
@@ -524,23 +528,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (!BuildConfig.DEBUG) {
-            Log.d(Const.TAG, "Is a release build. Setting up analytics");
-            requestAnalyticsPermission();
-            setupAnalytics();
-        } else {
-            Log.d(Const.TAG, "Debug build. Analytics is disabled");
-        }
+        ((ScreenCamApp) getApplication()).setupAnalytics();
+        Countly.sharedInstance().onStart(this);
     }
 
     @Override
     protected void onStop() {
-        if (!BuildConfig.DEBUG) {
-            if (Countly.sharedInstance().hasBeenCalledOnStart()) {
-                Countly.sharedInstance().onStop();
-                Log.d(Const.TAG, "Countly stopped");
-            }
-        }
+        Countly.sharedInstance().onStop();
         super.onStop();
     }
 

@@ -38,6 +38,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.orpheusdroid.screenrecorder.folderpicker.FolderChooser;
 import com.orpheusdroid.screenrecorder.folderpicker.OnDirectorySelectedListerner;
@@ -412,10 +413,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                 CheckBoxPreference anonymousStats = (CheckBoxPreference) findPreference(getString(R.string.preference_anonymous_statistics_key));
                 if(!crashReporting.isChecked())
                     anonymousStats.setChecked(false);
-                startAnalytics();
-                break;
             case R.string.preference_anonymous_statistics_title:
-                startAnalytics();
+                Toast.makeText(getActivity(), R.string.toast_message_countly_activity_restart, Toast.LENGTH_SHORT).show();
+                activity.recreate();
                 break;
             case R.string.preference_theme_title:
                 activity.recreate();
