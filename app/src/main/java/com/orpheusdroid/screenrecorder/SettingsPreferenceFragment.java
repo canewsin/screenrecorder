@@ -182,8 +182,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
      */
     private void updateResolution(ListPreference pref) {
         String resolution = getValue(getString(R.string.res_key), getNativeRes());
-        if (resolution.toLowerCase().contains("x"))
+        if (resolution.toLowerCase().contains("x")) {
             resolution = getNativeRes();
+            pref.setValue(resolution);
+        }
         pref.setSummary(resolution + "P");
     }
 
