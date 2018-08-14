@@ -570,12 +570,14 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     private String getResolution() {
         DisplayMetrics metrics = new DisplayMetrics();
         window = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        window.getDefaultDisplay().getMetrics(metrics);
+        window.getDefaultDisplay().getRealMetrics(metrics);
         DENSITY_DPI = metrics.densityDpi;
         int width = metrics.widthPixels;
         width = Integer.parseInt(prefs.getString(getString(R.string.res_key), Integer.toString(width)));
+        float aspectRatio = getAspectRatio(metrics);
         String res = width + "x" + (int) (width * getAspectRatio(metrics));
-        Log.d(Const.TAG, "resolution service: " + res + " rot: " + screenOrientation);
+        Log.d(Const.TAG, "resolution service: " + "[Width: "
+                + width + ", Height: " + width * aspectRatio + ", aspect ratio: " + aspectRatio + "]");
         return res;
     }
 
