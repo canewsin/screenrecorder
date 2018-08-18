@@ -97,6 +97,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     private boolean isRecording;
     private boolean useFloatingControls;
     private boolean showTouches;
+    private boolean isShakeGestureActive;
     private FloatingControlService floatingControlService;
     private boolean isBound = false;
     private NotificationManager mNotificationManager;
@@ -161,8 +162,6 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                     // Check if an app has to be started before recording and start the app
                     if (prefs.getBoolean(getString(R.string.preference_enable_target_app_key), false))
                         startAppBeforeRecording(prefs.getString(getString(R.string.preference_app_chooser_key), "none"));
-
-                    boolean isShakeGestureActive = prefs.getBoolean(getString(R.string.preference_shake_gesture_key), false);
 
                     if (isShakeGestureActive) {
                         //SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -537,6 +536,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         showTouches = prefs.getBoolean(getString(R.string.preference_show_touch_key), false);
         String saveFileName = getFileSaveName();
         SAVEPATH = saveLocation + File.separator + saveFileName + ".mp4";
+        isShakeGestureActive = prefs.getBoolean(getString(R.string.preference_shake_gesture_key), false);
     }
 
     /* The PreferenceScreen save values as string and we save the user selected video resolution as
@@ -671,12 +671,10 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 VibrationEffect.createOneShot(500, 255);
 
             startRecording();
-            Toast.makeText(this, "Rec start", Toast.LENGTH_SHORT).show();
         } else {
             Intent recordStopIntent = new Intent(this, RecorderService.class);
             recordStopIntent.setAction(Const.SCREEN_RECORDING_STOP);
             startService(recordStopIntent);
-            Toast.makeText(this, "Rec stop", Toast.LENGTH_SHORT).show();
             mShakeDetector.stop();
         }
     }
