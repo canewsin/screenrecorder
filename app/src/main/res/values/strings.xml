@@ -124,6 +124,7 @@
     <string name="preference_orientation_summary">Default orientation</string>
     <string name="preference_orientation_title">Orientation</string>
     <string name="toast_message_countly_activity_restart">Restarting activity for new settings to take effect</string>
+    <string name="toast_message_bitrate_high_warning">Bit rate too high! May not work for all</string>
     <plurals name="delete_alert_title">
         <item quantity="zero">Delete video?</item>
         <item quantity="one">Delete video?</item>

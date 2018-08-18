@@ -71,6 +71,8 @@
         <item>6.8 Mbit (Good)</item>
         <item>9.8 Mbit</item>
         <item>12 Mbit (Excellent)</item>
+        <item>24 Mbit (Warning)</item>
+        <item>48 Mbit (Warning)</item>
     </string-array>
 
     <string-array name="bitratesValue" translatable="false">
@@ -81,6 +83,8 @@
         <item>7130317</item>
         <item>10276045</item>
         <item>12582912</item>
+        <item>25165824</item>
+        <item>50331648</item>
     </string-array>
 
     <string-array name="filename" translatable="false">

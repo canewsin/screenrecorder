@@ -387,6 +387,8 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
             case R.string.preference_bit_title:
                 float bps = bitsToMb(Integer.parseInt(getValue(getString(R.string.bitrate_key), "7130317")));
                 pref.setSummary(bps + " Mbps");
+                if (bps > 12)
+                    Toast.makeText(getActivity(), R.string.toast_message_bitrate_high_warning, Toast.LENGTH_SHORT).show();
                 break;
             case R.string.preference_filename_format_title:
                 pref.setSummary(getFileSaveFormat());
