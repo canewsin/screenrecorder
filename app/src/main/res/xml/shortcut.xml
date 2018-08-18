@@ -28,7 +28,7 @@ which supports shortcuts in lower api isnt happy overflow_menu it -->
         <intent
             android:action="com.orpheusdroid.screenrecorder.RECORD"
             android:targetPackage="com.orpheusdroid.screenrecorder"
-            android:targetClass="com.orpheusdroid.screenrecorder.MainActivity" />
+            android:targetClass="com.orpheusdroid.screenrecorder.ui.MainActivity" />
     </shortcut>
     <!-- Specify more shortcuts here. -->
 </shortcuts>

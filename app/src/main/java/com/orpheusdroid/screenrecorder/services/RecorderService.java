@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017. Vijai Chandra Prasad R.
+ * Copyright (c) 2016-2018. Vijai Chandra Prasad R.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses
  */
 
-package com.orpheusdroid.screenrecorder;
+package com.orpheusdroid.screenrecorder.services;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -58,7 +58,11 @@ import android.view.Surface;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.orpheusdroid.screenrecorder.Const;
+import com.orpheusdroid.screenrecorder.R;
 import com.orpheusdroid.screenrecorder.gesture.ShakeEventManager;
+import com.orpheusdroid.screenrecorder.ui.EditVideoActivity;
+import com.orpheusdroid.screenrecorder.ui.MainActivity;
 
 import java.io.File;
 import java.io.IOException;

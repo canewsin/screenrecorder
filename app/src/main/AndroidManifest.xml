@@ -34,7 +34,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Light" >
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.Light.NoActionBar">
             <intent-filter>
@@ -49,10 +49,10 @@
         </activity>
 
         <service
-            android:name=".RecorderService"
+            android:name=".services.RecorderService"
             android:exported="false" />
         <service
-            android:name=".FloatingControlService"
+            android:name=".services.FloatingControlService"
             android:exported="false" />
         <service android:name="org.openudid.OpenUDID_service">
             <intent-filter>
@@ -61,7 +61,7 @@
         </service>
 
         <service
-            android:name=".QuickRecordTile"
+            android:name=".services.QuickRecordTile"
             android:icon="@drawable/fab_record"
             android:label="@string/quick_settings_tile_default_title"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -71,7 +71,7 @@
         </service>
 
         <activity
-            android:name=".AboutActivity"
+            android:name=".ui.AboutActivity"
             android:label="@string/about_activity_label" />
 
         <provider
@@ -85,9 +85,9 @@
         </provider>
 
         <activity
-            android:name=".PrivacyPolicy"
+            android:name=".ui.PrivacyPolicy"
             android:label="Privacy Policy" />
-        <activity android:name=".EditVideoActivity" />
+        <activity android:name=".ui.EditVideoActivity" />
     </application>
 
 </manifest>

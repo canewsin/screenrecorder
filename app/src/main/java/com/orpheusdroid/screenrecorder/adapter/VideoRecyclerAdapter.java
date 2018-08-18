@@ -45,10 +45,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orpheusdroid.screenrecorder.Const;
-import com.orpheusdroid.screenrecorder.EditVideoActivity;
 import com.orpheusdroid.screenrecorder.R;
-import com.orpheusdroid.screenrecorder.VideosListFragment;
 import com.orpheusdroid.screenrecorder.encoder.Mp4toGIFConverter;
+import com.orpheusdroid.screenrecorder.ui.EditVideoActivity;
+import com.orpheusdroid.screenrecorder.ui.VideosListFragment;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

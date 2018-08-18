@@ -15,7 +15,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses
  */
 
-package com.orpheusdroid.screenrecorder;
+package com.orpheusdroid.screenrecorder.services;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
@@ -23,6 +23,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
+
+import com.orpheusdroid.screenrecorder.Const;
+import com.orpheusdroid.screenrecorder.R;
+import com.orpheusdroid.screenrecorder.ui.MainActivity;
 
 /**
  * Todo: Add class description here
