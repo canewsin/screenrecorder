@@ -125,6 +125,9 @@
     <string name="preference_orientation_title">Orientation</string>
     <string name="toast_message_countly_activity_restart">Restarting activity for new settings to take effect</string>
     <string name="toast_message_bitrate_high_warning">Bit rate too high! May not work for all</string>
+    <string name="preference_camera_overlay_title">Show Camera Overlay</string>
+    <string name="preference_camera_overlay_summary">Enable/Disable Camera overlay. You can switch between front and back camera</string>
+    <string name="preference_camera_overlay_key" translatable="false">camera_overlay</string>
     <plurals name="delete_alert_title">
         <item quantity="zero">Delete video?</item>
         <item quantity="one">Delete video?</item>

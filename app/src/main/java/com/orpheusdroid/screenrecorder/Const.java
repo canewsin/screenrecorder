@@ -57,8 +57,10 @@ public class Const {
     public static final String VIDEO_EDIT_URI_KEY = "edit_video";
     public static final int EXTDIR_REQUEST_CODE = 1000;
     public static final int AUDIO_REQUEST_CODE = 1001;
-    public static final int SYSTEM_WINDOWS_CODE = 1002;
+    public static final int FLOATING_CONTROLS_SYSTEM_WINDOWS_CODE = 1002;
     public static final int SCREEN_RECORD_REQUEST_CODE = 1003;
+    public static final int CAMERA_REQUEST_CODE = 1006;
+    public static final int CAMERA_SYSTEM_WINDOWS_CODE = 1007;
     public static final String SCREEN_RECORDING_START = "com.orpheusdroid.screenrecorder.services.action.startrecording";
     public static final String SCREEN_RECORDING_PAUSE = "com.orpheusdroid.screenrecorder.services.action.pauserecording";
     public static final String SCREEN_RECORDING_RESUME = "com.orpheusdroid.screenrecorder.services.action.resumerecording";
@@ -82,6 +84,7 @@ public class Const {
     public static final String PREFS_LIGHT_THEME = "light_theme";
     public static final String PREFS_DARK_THEME = "dark_theme";
     public static final String PREFS_BLACK_THEME = "black_theme";
+    public static final String PREFS_CAMERA_OVERLAY_POS = "camera_overlay_pos";
 
     public enum RecordingState {
         RECORDING, PAUSED, STOPPED

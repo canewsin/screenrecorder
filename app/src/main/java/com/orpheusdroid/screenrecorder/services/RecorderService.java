@@ -100,6 +100,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
 
     private boolean isRecording;
     private boolean useFloatingControls;
+    private boolean showCameraOverlay;
     private boolean showTouches;
     private boolean isShakeGestureActive;
     private FloatingControlService floatingControlService;
@@ -129,6 +130,20 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         public void onServiceDisconnected(ComponentName name) {
             floatingControlService = null;
             isBound = false;
+        }
+    };
+
+    private ServiceConnection floatingCameraConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            //Get the service instance
+            FloatingCameraViewService.ServiceBinder binder = (FloatingCameraViewService.ServiceBinder) service;
+            FloatingCameraViewService floatingCameraViewService = binder.getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            floatingControlService = null;
         }
     };
     private long startTime, elapsedTime = 0;
@@ -327,6 +342,13 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 startService(floatinControlsIntent);
                 bindService(floatinControlsIntent,
                         serviceConnection, BIND_AUTO_CREATE);
+            }
+
+            if (showCameraOverlay) {
+                Intent floatingCameraIntent = new Intent(this, FloatingCameraViewService.class);
+                startService(floatingCameraIntent);
+                bindService(floatingCameraIntent,
+                        floatingCameraConnection, BIND_AUTO_CREATE);
             }
 
             //Set the state of the recording
@@ -537,6 +559,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
             saveDir.mkdirs();
         }
         useFloatingControls = prefs.getBoolean(getString(R.string.preference_floating_control_key), false);
+        showCameraOverlay = prefs.getBoolean(getString(R.string.preference_camera_overlay_key), false);
         showTouches = prefs.getBoolean(getString(R.string.preference_show_touch_key), false);
         String saveFileName = getFileSaveName();
         SAVEPATH = saveLocation + File.separator + saveFileName + ".mp4";

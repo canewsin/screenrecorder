@@ -89,6 +89,7 @@ dependencies {
     implementation 'com.android.support:support-v13:27.1.1'
     implementation 'ly.count.android:sdk:18.04'
     implementation 'life.knowledge4:k4l-video-trimmer:1.0'
+    implementation 'com.github.google:cameraview:3eaeac09a7f'
 
     playstoreImplementation 'org.solovyev.android:checkout:1.2.1'
 

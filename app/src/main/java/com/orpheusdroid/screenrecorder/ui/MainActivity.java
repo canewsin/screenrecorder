@@ -325,8 +325,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         //Result for system windows permission required to show floating controls
-        if (requestCode == Const.SYSTEM_WINDOWS_CODE) {
-            setSystemWindowsPermissionResult();
+        if (requestCode == Const.FLOATING_CONTROLS_SYSTEM_WINDOWS_CODE || requestCode == Const.CAMERA_SYSTEM_WINDOWS_CODE) {
+            setSystemWindowsPermissionResult(requestCode);
             return;
         }
 
@@ -393,11 +393,11 @@ public class MainActivity extends AppCompatActivity {
      * Method to request system windows permission. The permission is granted implicitly on API's below 23
      */
     @TargetApi(23)
-    public void requestSystemWindowsPermission() {
+    public void requestSystemWindowsPermission(int code) {
         if (!Settings.canDrawOverlays(this)) {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                     Uri.parse("package:" + getPackageName()));
-            startActivityForResult(intent, Const.SYSTEM_WINDOWS_CODE);
+            startActivityForResult(intent, code);
         }
     }
 
@@ -406,21 +406,30 @@ public class MainActivity extends AppCompatActivity {
      * The permission is always set to granted if the api is under 23
      */
     @TargetApi(23)
-    private void setSystemWindowsPermissionResult() {
+    private void setSystemWindowsPermissionResult(int requestCode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Settings.canDrawOverlays(this)) {
-                mPermissionResultListener.onPermissionResult(Const.SYSTEM_WINDOWS_CODE,
+                mPermissionResultListener.onPermissionResult(requestCode,
                         new String[]{"System Windows Permission"},
                         new int[]{PackageManager.PERMISSION_GRANTED});
             } else {
-                mPermissionResultListener.onPermissionResult(Const.SYSTEM_WINDOWS_CODE,
+                mPermissionResultListener.onPermissionResult(requestCode,
                         new String[]{"System Windows Permission"},
                         new int[]{PackageManager.PERMISSION_DENIED});
             }
         } else {
-            mPermissionResultListener.onPermissionResult(Const.SYSTEM_WINDOWS_CODE,
+            mPermissionResultListener.onPermissionResult(requestCode,
                     new String[]{"System Windows Permission"},
                     new int[]{PackageManager.PERMISSION_GRANTED});
+        }
+    }
+
+    public void requestPermissionCamera() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    Const.CAMERA_REQUEST_CODE);
         }
     }
 

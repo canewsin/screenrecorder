@@ -101,6 +101,11 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
     private FolderChooser dirChooser;
 
     /**
+     * SwitchPreference for camera to show overlay
+     */
+    private CheckBoxPreference cameraOverlay;
+
+    /**
      * MainActivity object
      */
     private MainActivity activity;
@@ -144,6 +149,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         usageStats = (CheckBoxPreference) findPreference(getString(R.string.preference_anonymous_statistics_key));
         //Set previously chosen directory as initial directory
         dirChooser.setCurrentDir(getValue(getString(R.string.savelocation_key), defaultSaveLoc));
+        cameraOverlay = (CheckBoxPreference) findPreference(getString(R.string.preference_camera_overlay_key));
 
         ListPreference orientation = (ListPreference) findPreference(getString(R.string.orientation_key));
         orientation.setSummary(orientation.getEntry());
@@ -167,7 +173,12 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
 
         //If floating controls is checked, check for system windows permission
         if (floatingControl.isChecked())
-            requestSystemWindowsPermission();
+            requestSystemWindowsPermission(Const.FLOATING_CONTROLS_SYSTEM_WINDOWS_CODE);
+
+        if (cameraOverlay.isChecked()) {
+            requestCameraPermission();
+            requestSystemWindowsPermission(Const.CAMERA_SYSTEM_WINDOWS_CODE);
+        }
 
         if(touchPointer.isChecked()){
             if (!hasPluginInstalled())
@@ -406,7 +417,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                 filename.setSummary(getFileSaveFormat());
                 break;
             case R.string.preference_floating_control_title:
-                requestSystemWindowsPermission();
+                requestSystemWindowsPermission(Const.FLOATING_CONTROLS_SYSTEM_WINDOWS_CODE);
                 break;
             case R.string.preference_show_touch_title:
                 CheckBoxPreference showTouchCB = (CheckBoxPreference)pref;
@@ -429,6 +440,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                 break;
             case R.string.preference_orientation_title:
                 pref.setSummary(((ListPreference) pref).getEntry());
+                break;
+            case R.string.preference_camera_overlay_title:
+                requestCameraPermission();
                 break;
         }
     }
@@ -494,14 +508,22 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
     }
 
     /**
+     * Method to request Camera permission
+     */
+    public void requestCameraPermission() {
+        if (activity != null)
+            activity.requestPermissionCamera();
+    }
+
+    /**
      * Method to request android system windows permission to show floating controls
      * <p>
      *     Shown only on devices above api 23 (Marshmallow)
      * </p>
      */
-    private void requestSystemWindowsPermission() {
+    private void requestSystemWindowsPermission(int code) {
         if (activity != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.requestSystemWindowsPermission();
+            activity.requestSystemWindowsPermission(code);
         } else {
             Log.d(Const.TAG, "API is < 23");
         }
@@ -571,13 +593,31 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                     recaudio.setChecked(false);
                 }
                 return;
-            case Const.SYSTEM_WINDOWS_CODE:
+            case Const.FLOATING_CONTROLS_SYSTEM_WINDOWS_CODE:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     Log.d(Const.TAG, "System Windows permission granted");
                     floatingControl.setChecked(true);
                 } else {
                     Log.d(Const.TAG, "System Windows permission denied");
                     floatingControl.setChecked(false);
+                }
+                return;
+            case Const.CAMERA_SYSTEM_WINDOWS_CODE:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    Log.d(Const.TAG, "System Windows permission granted");
+                    cameraOverlay.setChecked(true);
+                } else {
+                    Log.d(Const.TAG, "System Windows permission denied");
+                    cameraOverlay.setChecked(false);
+                }
+                return;
+            case Const.CAMERA_REQUEST_CODE:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    Log.d(Const.TAG, "System Windows permission granted");
+                    requestSystemWindowsPermission(Const.CAMERA_SYSTEM_WINDOWS_CODE);
+                } else {
+                    Log.d(Const.TAG, "System Windows permission denied");
+                    cameraOverlay.setChecked(false);
                 }
             default:
                 Log.d(Const.TAG, "Unknown permission request with request code: " + requestCode);
