@@ -435,7 +435,7 @@ public class VideoRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
      */
     private void deleteVideos(ArrayList<Video> deleteVideos) {
         for (Video video : deleteVideos) {
-            if (video.getFile().delete()) {
+            if (!video.isSection() && video.getFile().delete()) {
                 notifyItemRemoved(videos.indexOf(video));
                 videos.remove(videos.indexOf(video));
             }
