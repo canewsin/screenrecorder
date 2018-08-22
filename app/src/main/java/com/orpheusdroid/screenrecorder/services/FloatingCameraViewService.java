@@ -20,6 +20,7 @@ package com.orpheusdroid.screenrecorder.services;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.os.Binder;
 import android.os.Build;
@@ -52,6 +53,8 @@ public class FloatingCameraViewService extends Service implements View.OnClickLi
     private LinearLayout hidenCameraView;
     private ImageButton resizeOverlay;
     private CameraView cameraView;
+    private boolean isCameraViewHidden;
+    private Values values;
     private WindowManager.LayoutParams params;
     private SharedPreferences prefs;
     private OverlayResize overlayResize = OverlayResize.MINWINDOW;
@@ -86,6 +89,7 @@ public class FloatingCameraViewService extends Service implements View.OnClickLi
         resizeOverlay = mFloatingView.findViewById(R.id.overlayResize);
 
         hidenCameraView = hidenCameraView.findViewById(R.id.rootOverlayExpandBtn);
+        values = new Values();
 
         hideCameraBtn.setOnClickListener(this);
         switchCameraBtn.setOnClickListener(this);
@@ -104,8 +108,8 @@ public class FloatingCameraViewService extends Service implements View.OnClickLi
 
         //Add the view to the window.
         params = new WindowManager.LayoutParams(
-                Values.smallCameraX,
-                Values.smallCameraY,
+                values.smallCameraX,
+                values.smallCameraY,
                 layoutType,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
@@ -123,6 +127,23 @@ public class FloatingCameraViewService extends Service implements View.OnClickLi
         setupDragListener();
 
         return START_STICKY;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        changeCameraOrientation();
+    }
+
+    private void changeCameraOrientation() {
+        values.buildValues();
+        int x = overlayResize == OverlayResize.MAXWINDOW ? values.bigCameraX : values.smallCameraX;
+        int y = overlayResize == OverlayResize.MAXWINDOW ? values.bigCameraY : values.smallCameraY;
+        if (!isCameraViewHidden) {
+            params.height = y;
+            params.width = x;
+            mWindowManager.updateViewLayout(mCurrentView, params);
+        }
     }
 
     private void setupDragListener() {
@@ -215,8 +236,8 @@ public class FloatingCameraViewService extends Service implements View.OnClickLi
                 if (mCurrentView.equals(mFloatingView)) {
                     mWindowManager.removeViewImmediate(mCurrentView);
                     mCurrentView = hidenCameraView;
-                    params.width = Values.cameraHideX;
-                    params.height = Values.cameraHideY;
+                    params.width = values.cameraHideX;
+                    params.height = values.cameraHideY;
                     mWindowManager.addView(mCurrentView, params);
                 }
                 setupDragListener();
@@ -236,6 +257,7 @@ public class FloatingCameraViewService extends Service implements View.OnClickLi
             else
                 overlayResize = OverlayResize.MINWINDOW;
             mWindowManager.addView(mCurrentView, params);
+            isCameraViewHidden = false;
             updateCameraView();
             setupDragListener();
         }
@@ -243,13 +265,13 @@ public class FloatingCameraViewService extends Service implements View.OnClickLi
 
     private void updateCameraView() {
         if (overlayResize == OverlayResize.MINWINDOW) {
-            params.width = Values.bigCameraX;
-            params.height = Values.bigCameraY;
+            params.width = values.bigCameraX;
+            params.height = values.bigCameraY;
             overlayResize = OverlayResize.MAXWINDOW;
             resizeOverlay.setImageResource(R.drawable.ic_bigscreen_exit);
         } else {
-            params.width = Values.smallCameraX;
-            params.height = Values.smallCameraY;
+            params.width = values.smallCameraX;
+            params.height = values.smallCameraY;
             overlayResize = OverlayResize.MINWINDOW;
             resizeOverlay.setImageResource(R.drawable.ic_bigscreen);
         }
@@ -260,17 +282,38 @@ public class FloatingCameraViewService extends Service implements View.OnClickLi
         MAXWINDOW, MINWINDOW
     }
 
-    private static class Values {
-        static int smallCameraX = dpToPx(120);
-        static int smallCameraY = dpToPx(160);
-        static int bigCameraX = dpToPx(150);
-        static int bigCameraY = dpToPx(200);
-        static int cameraHideX = dpToPx(60);
-        static int cameraHideY = dpToPx(60);
+    private class Values {
+        int smallCameraX;
+        int smallCameraY;
+        int bigCameraX;
+        int bigCameraY;
+        int cameraHideX;
+        int cameraHideY;
 
-        private static int dpToPx(int dp) {
-            DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        public Values() {
+            buildValues();
+            cameraHideX = dpToPx(60);
+            cameraHideY = dpToPx(60);
+        }
+
+        private int dpToPx(int dp) {
+            DisplayMetrics displayMetrics = FloatingCameraViewService.this.getResources().getDisplayMetrics();
             return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        }
+
+        void buildValues() {
+            int orientation = context.getResources().getConfiguration().orientation;
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                smallCameraX = dpToPx(160);
+                smallCameraY = dpToPx(120);
+                bigCameraX = dpToPx(200);
+                bigCameraY = dpToPx(150);
+            } else {
+                smallCameraX = dpToPx(120);
+                smallCameraY = dpToPx(160);
+                bigCameraX = dpToPx(150);
+                bigCameraY = dpToPx(200);
+            }
         }
     }
 
