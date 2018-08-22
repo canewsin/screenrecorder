@@ -57,6 +57,19 @@ android {
             dimension "tier"
             versionNameSuffix '-fdroid'
         }
+        playstoreDonate {
+            dimension "tier"
+            versionNameSuffix '-playstore Donate'
+            applicationIdSuffix '.donate'
+            buildConfigField "String", "APP_PUB_KEY", getAppKey("app_pub_key_donate")
+        }
+    }
+    sourceSets {
+        playstoreDonate {
+            java.srcDirs = ['src/main/java', 'src/playstore/java']
+            res.srcDirs = ['src/main/res', 'src/playstore/res']
+            manifest.srcFile 'src/playstore/AndroidManifest.xml'
+        }
     }
 }
 
@@ -92,6 +105,7 @@ dependencies {
     implementation 'com.github.google:cameraview:3eaeac09a7f'
 
     playstoreImplementation 'org.solovyev.android:checkout:1.2.1'
+    playstoreDonateImplementation 'org.solovyev.android:checkout:1.2.1'
 
     testImplementation 'junit:junit:4.12'
 }
