@@ -53,12 +53,12 @@ public class ScreenCamBaseApp extends Application {
         String[] groupFeatures = new String[]{Countly.CountlyFeatureNames.sessions
                 , Countly.CountlyFeatureNames.users, Countly.CountlyFeatureNames.events
                 , Countly.CountlyFeatureNames.starRating};
-        Countly.sharedInstance().CreateFeatureGroup(Const.COUNTLY_USAGE_STATS_GROUP_NAME, groupFeatures);
+        Countly.sharedInstance().createFeatureGroup(Const.COUNTLY_USAGE_STATS_GROUP_NAME, groupFeatures);
 
         boolean isUsageStatsEnabled = PreferenceManager
                 .getDefaultSharedPreferences(this)
                 .getBoolean(getString(R.string.preference_anonymous_statistics_key), false);
-        Countly.sharedInstance().SetConsentFeatureGroup(Const.COUNTLY_USAGE_STATS_GROUP_NAME, isUsageStatsEnabled);
+        Countly.sharedInstance().setConsentFeatureGroup(Const.COUNTLY_USAGE_STATS_GROUP_NAME, isUsageStatsEnabled);
 
         boolean isCrashesEnabled = PreferenceManager
                 .getDefaultSharedPreferences(this)
