@@ -86,7 +86,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     private static int WIDTH, HEIGHT, FPS, DENSITY_DPI;
     private static int BITRATE;
-    private static boolean mustRecAudio;
+    private static String audioRecSource;
     private static String SAVEPATH;
 
     static {
@@ -400,9 +400,20 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     /* Initialize MediaRecorder with desired default values and values set by user. Everything is
      * pretty much self explanatory */
     private void initRecorder() {
+        boolean mustRecAudio = false;
         try {
-            if (mustRecAudio)
-                mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            switch (audioRecSource) {
+                case "1":
+                    mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    mustRecAudio = true;
+                    break;
+                case "2":
+                    mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+                    mMediaRecorder.setAudioEncodingBitRate(4603248);
+                    mMediaRecorder.setAudioSamplingRate(96000);
+                    mustRecAudio = true;
+                    break;
+            }
             mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
             mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
             mMediaRecorder.setOutputFile(SAVEPATH);
@@ -551,7 +562,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         setWidthHeight(res);
         FPS = Integer.parseInt(prefs.getString(getString(R.string.fps_key), "30"));
         BITRATE = Integer.parseInt(prefs.getString(getString(R.string.bitrate_key), "7130317"));
-        mustRecAudio = prefs.getBoolean(getString(R.string.audiorec_key), false);
+        audioRecSource = prefs.getString(getString(R.string.audiorec_key), "0");
         String saveLocation = prefs.getString(getString(R.string.savelocation_key),
                 Environment.getExternalStorageDirectory() + File.separator + Const.APPDIR);
         File saveDir = new File(saveLocation);

@@ -12,7 +12,7 @@
     <string name="res_key" translatable="false">resolution</string>
     <string name="fps_key" translatable="false">fps</string>
     <string name="bitrate_key" translatable="false">bitrate</string>
-    <string name="audiorec_key" translatable="false">audiorec</string>
+    <string name="audiorec_key" translatable="false">audiorecloc</string>
     <string name="savelocation_key" translatable="false">savelocation</string>
     <string name="filename_key" translatable="false">filename</string>
     <string name="preference_filename_format_title">File name format</string>

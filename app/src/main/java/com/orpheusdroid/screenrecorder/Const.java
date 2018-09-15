@@ -61,6 +61,7 @@ public class Const {
     public static final int SCREEN_RECORD_REQUEST_CODE = 1003;
     public static final int CAMERA_REQUEST_CODE = 1006;
     public static final int CAMERA_SYSTEM_WINDOWS_CODE = 1007;
+    public static final int INTERNAL_AUDIO_REQUEST_CODE = 1008;
     public static final String SCREEN_RECORDING_START = "com.orpheusdroid.screenrecorder.services.action.startrecording";
     public static final String SCREEN_RECORDING_PAUSE = "com.orpheusdroid.screenrecorder.services.action.pauserecording";
     public static final String SCREEN_RECORDING_RESUME = "com.orpheusdroid.screenrecorder.services.action.resumerecording";

@@ -109,6 +109,18 @@
         <item>8</item>
     </string-array>
 
+    <string-array name="audioSettingsEntries">
+        <item>None</item>
+        <item>Mic</item>
+        <item>Internal Audio</item>
+    </string-array>
+
+    <string-array name="audioSettingsValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
     <string-array name="themeArray">
         <item>Light</item>
         <item>Dark</item>

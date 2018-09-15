@@ -76,9 +76,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
     private ListPreference res;
 
     /**
-     * CheckBoxPreference to manage audio recording via mic setting
+     * ListPreference to manage audio recording via mic setting
      */
-    private CheckBoxPreference recaudio;
+    private ListPreference recaudio;
 
     /**
      * CheckBoxPreference to manage onscreen floating control setting
@@ -139,7 +139,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         res = (ListPreference) findPreference(getString(R.string.res_key));
         ListPreference fps = (ListPreference) findPreference(getString(R.string.fps_key));
         ListPreference bitrate = (ListPreference) findPreference(getString(R.string.bitrate_key));
-        recaudio = (CheckBoxPreference) findPreference(getString(R.string.audiorec_key));
+        recaudio = (ListPreference) findPreference(getString(R.string.audiorec_key));
         ListPreference filenameFormat = (ListPreference) findPreference(getString(R.string.filename_key));
         EditTextPreference filenamePrefix = (EditTextPreference) findPreference(getString(R.string.fileprefix_key));
         dirChooser = (FolderChooser) findPreference(getString(R.string.savelocation_key));
@@ -167,9 +167,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         filenameFormat.setSummary(getFileSaveFormat());
         filenamePrefix.setSummary(getValue(getString(R.string.fileprefix_key), "recording"));
 
-        //If record audio checkbox is checked, check for record audio permission
-        if (recaudio.isChecked())
-            requestAudioPermission();
+        checkAudioRecPermission();
 
         //If floating controls is checked, check for system windows permission
         if (floatingControl.isChecked())
@@ -187,6 +185,19 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
 
         //set callback for directory change
         dirChooser.setOnDirectoryClickedListerner(this);
+    }
+
+    private void checkAudioRecPermission() {
+        String value = recaudio.getValue();
+        switch (value) {
+            case "1":
+                requestAudioPermission(Const.AUDIO_REQUEST_CODE);
+                break;
+            case "2":
+                requestAudioPermission(Const.INTERNAL_AUDIO_REQUEST_CODE);
+                break;
+        }
+        recaudio.setSummary(recaudio.getEntry());
     }
 
     /**
@@ -408,7 +419,18 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                 pref.setSummary(getFileSaveFormat());
                 break;
             case R.string.preference_audio_record_title:
-                requestAudioPermission();
+                switch (recaudio.getValue()) {
+                    case "1":
+                        requestAudioPermission(Const.AUDIO_REQUEST_CODE);
+                        break;
+                    case "2":
+                        requestAudioPermission(Const.INTERNAL_AUDIO_REQUEST_CODE);
+                        break;
+                    default:
+                        recaudio.setValue("0");
+                        break;
+                }
+                pref.setSummary(((ListPreference) pref).getEntry());
                 break;
             case R.string.preference_filename_prefix_title:
                 EditTextPreference etp = (EditTextPreference) pref;
@@ -501,9 +523,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
     /**
      * Method to request android permission to record audio
      */
-    public void requestAudioPermission() {
+    public void requestAudioPermission(int requestCode) {
         if (activity != null) {
-            activity.requestPermissionAudio();
+            activity.requestPermissionAudio(requestCode);
         }
     }
 
@@ -587,11 +609,22 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
             case Const.AUDIO_REQUEST_CODE:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     Log.d(Const.TAG, "Record audio permission granted.");
-                    recaudio.setChecked(true);
+                    recaudio.setValue("1");
                 } else {
                     Log.d(Const.TAG, "Record audio permission denied");
-                    recaudio.setChecked(false);
+                    recaudio.setValue("0");
                 }
+                recaudio.setSummary(recaudio.getEntry());
+                return;
+            case Const.INTERNAL_AUDIO_REQUEST_CODE:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    Log.d(Const.TAG, "Record audio permission granted.");
+                    recaudio.setValue("2");
+                } else {
+                    Log.d(Const.TAG, "Record audio permission denied");
+                    recaudio.setValue("0");
+                }
+                recaudio.setSummary(recaudio.getEntry());
                 return;
             case Const.FLOATING_CONTROLS_SYSTEM_WINDOWS_CODE:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {

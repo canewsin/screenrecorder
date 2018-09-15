@@ -436,12 +436,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Method to request audio permission
      */
-    public void requestPermissionAudio() {
+    public void requestPermissionAudio(int requestCode) {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.RECORD_AUDIO},
-                    Const.AUDIO_REQUEST_CODE);
+                    requestCode);
         }
     }
 
