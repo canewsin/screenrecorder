@@ -223,23 +223,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 resumeScreenRecording();
                 break;
             case Const.SCREEN_RECORDING_STOP:
-                //Unbind the floating control service if its bound (naturally unbound if floating controls is disabled)
-                if (isBound) {
-                    unbindService(serviceConnection);
-                    Log.d(Const.TAG, "Unbinding connection service");
-                }
-                stopScreenSharing();
-
-                //Send a broadcast receiver to the plugin app to disable show touches since the recording is stopped
-                if (showTouches) {
-                    Intent TouchIntent = new Intent();
-                    TouchIntent.setAction("com.orpheusdroid.screenrecorder.DISABLETOUCH");
-                    TouchIntent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-                    sendBroadcast(TouchIntent);
-                }
-
-                //The service is started as foreground service and hence has to be stopped
-                stopForeground(true);
+                stopRecording();
                 break;
             case Const.SCREEN_RECORDING_DESTORY_SHAKE_GESTURE:
                 mShakeDetector.stop();
@@ -247,6 +231,26 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 break;
         }
         return START_STICKY;
+    }
+
+    private void stopRecording() {
+        //Unbind the floating control service if its bound (naturally unbound if floating controls is disabled)
+        if (isBound) {
+            unbindService(serviceConnection);
+            Log.d(Const.TAG, "Unbinding connection service");
+        }
+        stopScreenSharing();
+
+        //Send a broadcast receiver to the plugin app to disable show touches since the recording is stopped
+        if (showTouches) {
+            Intent TouchIntent = new Intent();
+            TouchIntent.setAction("com.orpheusdroid.screenrecorder.DISABLETOUCH");
+            TouchIntent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+            sendBroadcast(TouchIntent);
+        }
+
+        //The service is started as foreground service and hence has to be stopped
+        stopForeground(true);
     }
 
     // Start the selected app before recording if its enabled and an app is selected
@@ -365,9 +369,11 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
             }
             Toast.makeText(this, R.string.screen_recording_started_toast, Toast.LENGTH_SHORT).show();
         } catch (IllegalStateException e) {
-            Log.d(Const.TAG, "Mediarecorder reached Illegal state exception. Did you start the recording twice?");
+            Log.e(Const.TAG, "Mediarecorder reached Illegal state exception. Did you start the recording twice?");
             Toast.makeText(this, R.string.recording_failed_toast, Toast.LENGTH_SHORT).show();
             isRecording = false;
+            mMediaProjection.stop();
+            stopSelf();
         }
 
         /* Add Pause action to Notification to pause screen recording if the user's android version
@@ -409,8 +415,14 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                     break;
                 case "2":
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
-                    mMediaRecorder.setAudioEncodingBitRate(4603248);
+                    mMediaRecorder.setAudioEncodingBitRate(320 * 96000);
                     mMediaRecorder.setAudioSamplingRate(96000);
+                    mustRecAudio = true;
+                    break;
+                case "3":
+                    mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.REMOTE_SUBMIX);
+                    mMediaRecorder.setAudioEncodingBitRate(384000);
+                    mMediaRecorder.setAudioSamplingRate(44100);
                     mustRecAudio = true;
                     break;
             }

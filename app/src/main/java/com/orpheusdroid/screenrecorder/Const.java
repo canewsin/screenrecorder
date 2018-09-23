@@ -62,6 +62,7 @@ public class Const {
     public static final int CAMERA_REQUEST_CODE = 1006;
     public static final int CAMERA_SYSTEM_WINDOWS_CODE = 1007;
     public static final int INTERNAL_AUDIO_REQUEST_CODE = 1008;
+    public static final int INTERNAL_R_SUBMIX_AUDIO_REQUEST_CODE = 1009;
     public static final String SCREEN_RECORDING_START = "com.orpheusdroid.screenrecorder.services.action.startrecording";
     public static final String SCREEN_RECORDING_PAUSE = "com.orpheusdroid.screenrecorder.services.action.pauserecording";
     public static final String SCREEN_RECORDING_RESUME = "com.orpheusdroid.screenrecorder.services.action.resumerecording";
@@ -86,6 +87,7 @@ public class Const {
     public static final String PREFS_DARK_THEME = "dark_theme";
     public static final String PREFS_BLACK_THEME = "black_theme";
     public static final String PREFS_CAMERA_OVERLAY_POS = "camera_overlay_pos";
+    public static final String PREFS_INTERNAL_AUDIO_DIALOG_KEY = "int_audio_diag";
 
     public enum RecordingState {
         RECORDING, PAUSED, STOPPED

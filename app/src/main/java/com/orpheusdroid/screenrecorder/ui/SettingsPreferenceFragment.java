@@ -424,7 +424,16 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                         requestAudioPermission(Const.AUDIO_REQUEST_CODE);
                         break;
                     case "2":
-                        requestAudioPermission(Const.INTERNAL_AUDIO_REQUEST_CODE);
+                        if (!prefs.getBoolean(Const.PREFS_INTERNAL_AUDIO_DIALOG_KEY, false))
+                            showInternalAudioWarning(false);
+                        else
+                            requestAudioPermission(Const.INTERNAL_AUDIO_REQUEST_CODE);
+                        break;
+                    case "3":
+                        if (!prefs.getBoolean(Const.PREFS_INTERNAL_AUDIO_DIALOG_KEY, false))
+                            showInternalAudioWarning(true);
+                        else
+                            requestAudioPermission(Const.INTERNAL_R_SUBMIX_AUDIO_REQUEST_CODE);
                         break;
                     default:
                         recaudio.setValue("0");
@@ -495,6 +504,37 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                 .create().show();
     }
 
+    private void showInternalAudioWarning(boolean isR_submix) {
+        int message;
+        final int requestCode;
+        if (isR_submix) {
+            message = R.string.alert_dialog_r_submix_audio_warning_message;
+            requestCode = Const.INTERNAL_R_SUBMIX_AUDIO_REQUEST_CODE;
+        } else {
+            message = R.string.alert_dialog_internal_audio_warning_message;
+            requestCode = Const.INTERNAL_AUDIO_REQUEST_CODE;
+        }
+        new AlertDialog.Builder(activity)
+                .setTitle(R.string.alert_dialog_internal_audio_warning_title)
+                .setMessage(message)
+                .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        requestAudioPermission(requestCode);
+
+                    }
+                })
+                .setNegativeButton(R.string.alert_dialog_internal_audio_warning_negative_btn_text, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        prefs.edit().putBoolean(Const.PREFS_INTERNAL_AUDIO_DIALOG_KEY, true)
+                                .apply();
+                        requestAudioPermission(Const.INTERNAL_AUDIO_REQUEST_CODE);
+                    }
+                })
+                .create()
+                .show();
+    }
     /**
      * Check if "show touches" plugin is installed.
      *
@@ -620,6 +660,16 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     Log.d(Const.TAG, "Record audio permission granted.");
                     recaudio.setValue("2");
+                } else {
+                    Log.d(Const.TAG, "Record audio permission denied");
+                    recaudio.setValue("0");
+                }
+                recaudio.setSummary(recaudio.getEntry());
+                return;
+            case Const.INTERNAL_R_SUBMIX_AUDIO_REQUEST_CODE:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    Log.d(Const.TAG, "Record audio permission granted.");
+                    recaudio.setValue("3");
                 } else {
                     Log.d(Const.TAG, "Record audio permission denied");
                     recaudio.setValue("0");
