@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017. Vijai Chandra Prasad R.
+ * Copyright (c) 2016-2018. Vijai Chandra Prasad R.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
 
 package com.orpheusdroid.screenrecorder.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +27,8 @@ import android.widget.TextView;
 import com.orpheusdroid.screenrecorder.R;
 
 import java.util.ArrayList;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by vijai on 08-12-2017.

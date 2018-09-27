@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017. Vijai Chandra Prasad R.
+ * Copyright (c) 2016-2018. Vijai Chandra Prasad R.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,8 +23,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.preference.DialogPreference;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +36,9 @@ import com.orpheusdroid.screenrecorder.adapter.AppsListFragmentAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by vijai on 08-12-2017.

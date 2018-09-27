@@ -20,8 +20,6 @@ package com.orpheusdroid.screenrecorder.ui;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.MenuItem;
@@ -32,6 +30,9 @@ import com.orpheusdroid.screenrecorder.Const;
 import com.orpheusdroid.screenrecorder.R;
 
 import java.util.Calendar;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AboutActivity extends AppCompatActivity {
 

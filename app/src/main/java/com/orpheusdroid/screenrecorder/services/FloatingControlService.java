@@ -28,7 +28,6 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -43,6 +42,8 @@ import android.widget.LinearLayout;
 import com.orpheusdroid.screenrecorder.Const;
 import com.orpheusdroid.screenrecorder.Const.RecordingState;
 import com.orpheusdroid.screenrecorder.R;
+
+import androidx.annotation.Nullable;
 
 /**
  * Service to handle floating controls

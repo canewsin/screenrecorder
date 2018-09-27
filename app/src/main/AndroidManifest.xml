@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2016. Vijai Chandra Prasad R.
+  ~ Copyright (c) 2016-2018. Vijai Chandra Prasad R.
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -13,7 +13,7 @@
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see http://www.gnu.org/licenses
--->
+  -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.orpheusdroid.screenrecorder">
 
@@ -51,7 +51,7 @@
             android:theme="@style/AppTheme.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -93,7 +93,7 @@
             android:label="@string/about_activity_label" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">

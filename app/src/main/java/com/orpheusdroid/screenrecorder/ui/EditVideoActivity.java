@@ -22,7 +22,6 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -32,6 +31,7 @@ import com.orpheusdroid.screenrecorder.R;
 import java.io.File;
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AppCompatActivity;
 import life.knowledge4.videotrimmer.K4LVideoTrimmer;
 import life.knowledge4.videotrimmer.interfaces.OnTrimVideoListener;
 

@@ -19,12 +19,8 @@ package com.orpheusdroid.screenrecorder;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -38,6 +34,10 @@ import org.solovyev.android.checkout.ProductTypes;
 import org.solovyev.android.checkout.Purchase;
 
 import javax.annotation.Nonnull;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class DonateActivity extends AppCompatActivity implements View.OnClickListener{
 
