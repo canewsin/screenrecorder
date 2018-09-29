@@ -1,4 +1,4 @@
-# ScreenRecorder   [![Build Status](https://travis-ci.org/vijai1996/screenrecorder.svg?branch=master)](https://travis-ci.org/vijai1996/screenrecorder)
+# ScreenRecorder   [![pipeline status](https://gitlab.com/vijai/screenrecorder/badges/master/pipeline.svg)](https://gitlab.com/vijai/screenrecorder/commits/master)
 ![App Icon](ic_launcher-web.png?raw=true "App Icon")
 
 Requires Lollipop and above (SDK 21+)
@@ -27,14 +27,14 @@ Slack:    Comming soon!
 Make sure to have Git installed and clone the repo using
 
 ```
-git clone https://github.com/vijai1996/screenrecorder
+git clone https://gitlab.com/vijai/screenrecorder
 ```
 
 ### Building the apk
 Building apk is possible in 3 ways
-* 1.a. [Building debug apk using commandline](https://github.com/vijai1996/screenrecorder#1a-building-debug-apk-using-commandline)
-* 1.b. [Building release apk using commandline](https://github.com/vijai1996/screenrecorder#1b-building-release-apk-using-commandline)
-* 2.   [Building using AndroidStudio](https://github.com/vijai1996/screenrecorder#2-building-using-androidstudio)
+* 1.a. [Building debug apk using commandline](#1a-building-debug-apk-using-commandline)
+* 1.b. [Building release apk using commandline](#1b-building-release-apk-using-commandline)
+* 2.   [Building using AndroidStudio](#2-building-using-androidstudio)
 
 ### 1.a. Building debug apk using commandline
 Switch to project root directory and run
