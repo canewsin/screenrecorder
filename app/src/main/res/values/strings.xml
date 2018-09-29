@@ -1,3 +1,20 @@
+<!--
+  ~ Copyright (c) 2016-2018. Vijai Chandra Prasad R.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see http://www.gnu.org/licenses
+  -->
+
 <resources>
     <string name="app_name" translatable="false">ScreenCam</string>
     <string name="preference_resolution_title">Resolution</string>
@@ -42,7 +59,6 @@
     <string name="fab_record_hint">Start recording</string>
     <string name="recording_failed_toast">Screen recording failed.</string>
     <string name="screenrecording_already_active_toast">Screen recording session already active</string>
-    <string name="large_resolution_selected_toast">The selected resolution is larger than display resolution. Using %1$s resolution instead</string>
     <string name="shortcut_short_label">Record</string>
     <string name="shortcut_long_label">Quick Record</string>
     <string name="shortcut_disabled_message">Recording disabled</string>
@@ -51,7 +67,6 @@
     <string name="screen_recording_stopped_toast">Screen Recording stopped</string>
     <string name="screen_recording_resumed_toast">Screen Recording resumed</string>
     <string name="screen_recording_paused_toast">Screen Recording paused</string>
-    <string name="fab_stop_hint">Stop recording</string>
     <string name="share_intent_title">Share recorded</string>
     <string name="share_intent_notification_title">Share recorded video</string>
     <string name="share_intent_notification_content">click to open the recorded videos</string>

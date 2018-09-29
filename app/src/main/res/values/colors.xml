@@ -23,14 +23,11 @@
     <color name="colorPrimary">#2196F3</color>
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorAccent">#FF5722</color>
-    <color name="windowBackground">#FFFFFF</color>
-    <color name="navigationBarColor">#000000</color>
 
     <!-- Dark theme color resources -->
     <color name="colorPrimary_dark">#202020</color>
     <color name="colorPrimaryDark_dark">@android:color/black</color>
     <color name="textColorPrimary_dark">@android:color/white</color>
-    <color name="textColorSecondary_dark">#fafafa</color>
     <color name="colorAccent_dark">#009688</color>
     <color name="windowBackground_dark">#212121</color>
     <color name="navigationBarColor_dark">#191919</color>
@@ -40,14 +37,9 @@
     <!-- Black theme color resources -->
     <color name="colorPrimary_black">@android:color/black</color>
     <color name="colorPrimaryDark_black">@android:color/black</color>
-    <color name="textColorPrimary_black">@android:color/white</color>
-    <color name="textColorSecondary_black">#fafafa</color>
     <color name="colorAccent_black">#009688</color>
     <color name="windowBackground_black">@android:color/black</color>
-    <color name="navigationBarColor_black">#000000</color>
-    <color name="actionBarStyle_black">@android:color/black</color>
     <color name="popupBackground_black">#202020</color>
-    <color name="appBackground_black">@android:color/black</color>
     <color name="dialog_background_black">#101010</color>
     <color name="actionMode_background_black">#000000</color>
 
@@ -56,8 +48,6 @@
     <color name="colorPrimaryWhite">#FFFFFF</color>
     <color name="colorPrimaryDarkWhite">#fafafa</color>
     <color name="colorAccentWhite">#FF5722</color>
-    <color name="windowBackgroundWhite">#FFFFFF</color>
-    <color name="navigationBarColorWhite">#FFFFFF</color>
     <color name="actionBarStyle_white">#8C000000</color>
     <color name="tabbarStyle_white">#8C000000</color>
 </resources>

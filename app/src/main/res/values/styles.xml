@@ -104,10 +104,6 @@
         <item name="android:alertDialogTheme">@style/AppTheme.Black.DialogTheme</item>
     </style>
 
-    <style name="AppTheme.Black.CardView" parent="CardView.Dark">
-        <item name="cardBackgroundColor">@color/colorPrimaryDark_black</item>
-    </style>
-
     <style name="AppTheme.Black.DialogTheme" parent="Theme.AppCompat.Dialog">
         <item name="android:colorPrimary">@color/colorPrimary_black</item>
         <item name="android:colorPrimaryDark">@color/colorPrimaryDark_black</item>
@@ -119,10 +115,6 @@
     <style name="AppTheme.Black.ActionBar" parent="Theme.AppCompat">
         <item name="android:background">@color/colorPrimary_black</item>
         <item name="android:actionModeBackground">@color/actionMode_background_black</item>
-    </style>
-
-    <style name="AppTheme.Black.Dialog" parent="@android:style/Theme.Dialog">
-        <item name="android:background">@color/popupBackground_black</item>
     </style>
 
     <style name="AppTheme.Black.NoActionBar" parent="AppTheme.Black">

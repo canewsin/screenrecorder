@@ -1,3 +1,20 @@
+<!--
+  ~ Copyright (c) 2016-2018. Vijai Chandra Prasad R.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see http://www.gnu.org/licenses
+  -->
+
 <resources>
     <string name="preference_resolution_title">Résolution</string>
     <string name="preference_resolution_summary">Sélectionner la résolution de l\'enregistrement</string>
@@ -31,7 +48,6 @@
     <string name="fab_record_hint">Lancer l\'enregistrement</string>
     <string name="recording_failed_toast">Échec de l\'enregistrement vidéo.</string>
     <string name="screenrecording_already_active_toast">Une session d\'enregistrement est déjà active</string>
-    <string name="large_resolution_selected_toast">La résolution sélectionnée est plus large que la résolution de l\'écran. Utilisez plutôt la résolution %1$s</string>
     <string name="shortcut_short_label">Enregistrer</string>
     <string name="shortcut_long_label">Enregistrement rapide</string>
     <string name="shortcut_disabled_message">Enregistrement désactivé</string>
@@ -39,7 +55,6 @@
     <string name="screen_recording_stopped_toast">Arrêt de l\'enregistrement vidéo</string>
     <string name="screen_recording_resumed_toast">Reprise de l\'enregistrement vidéo</string>
     <string name="screen_recording_paused_toast">Pause de l\'enregistrement vidéo</string>
-    <string name="fab_stop_hint">Arrêter l\'enregistrement</string>
     <string name="share_intent_title">Partager une vidéo</string>
     <string name="share_intent_notification_title">Partager la vidéo enregistrée</string>
     <string name="share_intent_notification_content">Appuyez pour partager la vidéo enregistrée</string>

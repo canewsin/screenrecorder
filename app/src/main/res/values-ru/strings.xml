@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2016. Vijai Chandra Prasad R.
+  ~ Copyright (c) 2016-2018. Vijai Chandra Prasad R.
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -49,7 +49,6 @@
     <string name="fab_record_hint">Начать запись</string>
     <string name="recording_failed_toast">Запись экрана не удалась</string>
     <string name="screenrecording_already_active_toast">Запись экрана уже ведется</string>
-    <string name="large_resolution_selected_toast">Выбранное разрешение больше, чем у экрана устройства. Применено разрешение %1$s</string>
     <string name="shortcut_short_label">Запись</string>
     <string name="shortcut_long_label">Быстрая запись</string>
     <string name="shortcut_disabled_message">Запись отключена</string>
@@ -57,7 +56,6 @@
     <string name="screen_recording_stopped_toast">Запись экрана прекращена</string>
     <string name="screen_recording_resumed_toast">Запись экрана продолжается</string>
     <string name="screen_recording_paused_toast">Запись экрана приостановлена</string>
-    <string name="fab_stop_hint">Прекратить запись</string>
     <string name="share_intent_title">Поделиться записью</string>
     <string name="share_intent_notification_title">Поделитесь записанным видео</string>
     <string name="share_intent_notification_content">коснитесь, чтоб поделиться записанным видео</string>

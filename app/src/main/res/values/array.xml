@@ -49,20 +49,6 @@
         <item>landscape</item>
     </string-array>
 
-    <string-array name="resolutionsArray_18_9" translatable="false">
-        <item>360x720</item>
-        <item>720x1440</item>
-        <item>1080x2160</item>
-        <item>1440x2880</item>
-    </string-array>
-
-    <string-array name="resolutionValues_18_9" translatable="false">
-        <item>360x720</item>
-        <item>720x1440</item>
-        <item>1080x2160</item>
-        <item>1440x2880</item>
-    </string-array>
-
     <string-array name="bitrateArray" translatable="false">
         <item>1.0 Mbit (Very low)</item>
         <item>2.5 Mbit</item>
@@ -96,17 +82,6 @@
         <item>hhMMss_ddmmyyyy</item>
         <item>hhMMss_yymmdd</item>
         <item>hhMMss_ddmmyy</item>
-    </string-array>
-
-    <string-array name="filename_values" translatable="false">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
     </string-array>
 
     <string-array name="audioSettingsEntries">
