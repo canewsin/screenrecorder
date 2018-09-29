@@ -19,6 +19,9 @@
 <resources>
     <attr name="toolbarStyle" format="reference" />
     <attr name="tabBarStyle" format="reference" />
+    <attr name="menuDeleteIcon" format="reference" />
+    <attr name="menuSelectAllIcon" format="reference" />
+    <attr name="menuShareIcon" format="reference" />
     <attr name="selected_app_check" format="reference"/>
     <attr name="cardStyle" format="reference" />
 </resources>

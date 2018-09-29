@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2017. Vijai Chandra Prasad R.
+  ~ Copyright (c) 2016-2018. Vijai Chandra Prasad R.
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -19,21 +19,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/delete"
-        android:icon="@drawable/ic_delete_white_24dp"
+        android:icon="?attr/menuDeleteIcon"
         android:orderInCategory="1"
         android:title="@string/menu_delete"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/select_all"
-        android:icon="@drawable/ic_select_all_white_24dp"
+        android:icon="?attr/menuSelectAllIcon"
         android:orderInCategory="2"
         android:title="@string/menu_select_all"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/share"
-        android:icon="@drawable/ic_share_white_24dp"
+        android:icon="?attr/menuShareIcon"
         android:orderInCategory="2"
         android:title="@string/menu_share"
         app:showAsAction="ifRoom" />

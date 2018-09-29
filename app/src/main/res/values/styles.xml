@@ -23,6 +23,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="menuDeleteIcon">@drawable/ic_delete_white_24dp</item>
+        <item name="menuSelectAllIcon">@drawable/ic_select_all_white_24dp</item>
+        <item name="menuShareIcon">@drawable/ic_share_white_24dp</item>
     </style>
 
     <!-- Base Toolbar theme for light, dark and black theme. -->
@@ -66,6 +69,9 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="selected_app_check">@drawable/ic_check_circle_white_18dp</item>
         <item name="cardStyle">@style/AppTheme.Dark.CardView</item>
+        <item name="menuDeleteIcon">@drawable/ic_delete_white_24dp</item>
+        <item name="menuSelectAllIcon">@drawable/ic_select_all_white_24dp</item>
+        <item name="menuShareIcon">@drawable/ic_share_white_24dp</item>
     </style>
 
     <!-- Dark theme -->
@@ -143,6 +149,9 @@
         <item name="actionBarStyle">@style/AppTheme.White.ActionBarStyle</item>
         <item name="actionBarTheme">@style/AppTheme.White.ActionBarTheme</item>
         <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="menuDeleteIcon">@drawable/ic_delete_dark</item>
+        <item name="menuSelectAllIcon">@drawable/ic_select_all_dark</item>
+        <item name="menuShareIcon">@drawable/ic_share_dark</item>
     </style>
 
     <style name="AppTheme.White" parent="AppTheme.White.Base">
