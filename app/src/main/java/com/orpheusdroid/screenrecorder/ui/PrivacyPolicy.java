@@ -36,6 +36,9 @@ public class PrivacyPolicy extends AppCompatActivity {
         String theme = PreferenceManager.getDefaultSharedPreferences(this)
                 .getString(getString(R.string.preference_theme_key), Const.PREFS_LIGHT_THEME);
         switch (theme){
+            case Const.PREFS_WHITE_THEME:
+                setTheme(R.style.AppTheme_White);
+                break;
             case Const.PREFS_DARK_THEME:
                 setTheme(R.style.AppTheme_Dark);
                 break;

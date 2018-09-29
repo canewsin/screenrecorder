@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Permission listener interface to listen to permission results obtained from
      * <a href="SettingsPreferenceFragment">SettingsPreferenceFragment</a>
+     *
      * @see PermissionResultListener
      */
     private PermissionResultListener mPermissionResultListener;
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Interface to listen to settings changes pertaining to analytics.
      * This is used to enable/disable sdk depending on the user's settings in realtime (without waiting for app restart)
+     *
      * @see MainActivity.AnalyticsSettingsListerner
      */
     private AnalyticsSettingsListerner analyticsSettingsListerner;
@@ -126,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Object of {@link SharedPreferences} to read the app's settings.
+     *
      * @see SettingsPreferenceFragment
      */
     private SharedPreferences prefs;
@@ -152,7 +155,10 @@ public class MainActivity extends AppCompatActivity {
                 .getString(getString(R.string.preference_theme_key), Const.PREFS_LIGHT_THEME);
         int popupOverlayTheme = 0;
         int toolBarColor = 0;
-        switch (theme){
+        switch (theme) {
+            case Const.PREFS_WHITE_THEME:
+                setTheme(R.style.AppTheme_White_NoActionBar);
+                break;
             case Const.PREFS_DARK_THEME:
                 setTheme(R.style.AppTheme_Dark_NoActionBar);
                 popupOverlayTheme = R.style.AppTheme_PopupOverlay_Dark;
@@ -264,6 +270,7 @@ public class MainActivity extends AppCompatActivity {
      * Method to add the fragments: {@link SettingsPreferenceFragment} and {@link VideosListFragment}
      * to the viewpager and add {@link ViewPager#addOnPageChangeListener(ViewPager.OnPageChangeListener)}
      * to hide {@link #fab} on {@link VideosListFragment}
+     *
      * @param viewPager viewpager instance from the layout
      */
     private void setupViewPager(ViewPager viewPager) {
@@ -298,9 +305,10 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Method to check if the {@link RecorderService} is running
+     *
      * @param serviceClass Collection containing the {@link RecorderService} class
      * @return boolean value representing if the {@link RecorderService} is running
-     * @exception NullPointerException May throw NullPointerException
+     * @throws NullPointerException May throw NullPointerException
      */
     private boolean isServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -318,8 +326,8 @@ public class MainActivity extends AppCompatActivity {
      * and screen recording permission
      *
      * @param requestCode Unique request code for different startActivityForResult calls
-     * @param resultCode result code representing the user's choice
-     * @param data Extra intent data passed from calling intent
+     * @param resultCode  result code representing the user's choice
+     * @param data        Extra intent data passed from calling intent
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -451,7 +459,6 @@ public class MainActivity extends AppCompatActivity {
      * @param requestCode
      * @param permissions
      * @param grantResults
-     *
      * @see PermissionResultListener
      */
     @Override
@@ -528,6 +535,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Method to set {@link PermissionResultListener}
+     *
      * @param mPermissionResultListener {@link PermissionResultListener} object
      */
     public void setPermissionResultListener(PermissionResultListener mPermissionResultListener) {
@@ -536,6 +544,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Method to set {@link AnalyticsSettingsListerner}
+     *
      * @param analyticsSettingsListerner {@link AnalyticsSettingsListerner} object
      */
     public void setAnalyticsSettingsListerner(AnalyticsSettingsListerner analyticsSettingsListerner) {

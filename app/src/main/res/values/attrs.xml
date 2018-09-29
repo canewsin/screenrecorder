@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2017. Vijai Chandra Prasad R.
+  ~ Copyright (c) 2016-2018. Vijai Chandra Prasad R.
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -17,6 +17,8 @@
   -->
 
 <resources>
+    <attr name="toolbarStyle" format="reference" />
+    <attr name="tabBarStyle" format="reference" />
     <attr name="selected_app_check" format="reference"/>
     <attr name="cardStyle" format="reference" />
 </resources>

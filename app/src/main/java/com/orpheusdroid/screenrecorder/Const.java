@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016-2017. Vijai Chandra Prasad R.
+ * Copyright (c) 2016-2018. Vijai Chandra Prasad R.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -83,6 +83,7 @@ public class Const {
     public static final String COUNTLY_USAGE_STATS_GROUP_NAME = "analytics_group";
 
     public static final String PREFS_REQUEST_ANALYTICS_PERMISSION = "request_analytics_permission";
+    public static final String PREFS_WHITE_THEME = "white_theme";
     public static final String PREFS_LIGHT_THEME = "light_theme";
     public static final String PREFS_DARK_THEME = "dark_theme";
     public static final String PREFS_BLACK_THEME = "black_theme";

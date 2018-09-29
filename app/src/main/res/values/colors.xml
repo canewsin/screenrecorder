@@ -50,4 +50,14 @@
     <color name="appBackground_black">@android:color/black</color>
     <color name="dialog_background_black">#101010</color>
     <color name="actionMode_background_black">#000000</color>
+
+
+    <!-- Material White theme color resources -->
+    <color name="colorPrimaryWhite">#FFFFFF</color>
+    <color name="colorPrimaryDarkWhite">#fafafa</color>
+    <color name="colorAccentWhite">#FF5722</color>
+    <color name="windowBackgroundWhite">#FFFFFF</color>
+    <color name="navigationBarColorWhite">#FFFFFF</color>
+    <color name="actionBarStyle_white">#8C000000</color>
+    <color name="tabbarStyle_white">#8C000000</color>
 </resources>

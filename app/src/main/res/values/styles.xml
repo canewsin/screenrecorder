@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2016. Vijai Chandra Prasad R.
+  ~ Copyright (c) 2016-2018. Vijai Chandra Prasad R.
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -25,6 +25,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Base Toolbar theme for light, dark and black theme. -->
+    <style name="AppTheme.Base.ToolBar" parent="AppTheme.Light">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+    </style>
+
+    <!-- Base TabBar theme for light, dark and black theme. -->
+    <style name="AppTheme.TabBar.Base" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/AppTheme.TabText.Base</item>
+    </style>
+
+    <style name="AppTheme.TabText.Base" parent="TextAppearance.AppCompat.Button"></style>
+
     <style name="AppTheme.Light.NoActionBar" parent="AppTheme.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -36,6 +50,8 @@
         <item name="selected_app_check">@drawable/ic_check_circle_black_18dp</item>
         <item name="cardStyle">@style/CardView</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="toolbarStyle">@style/AppTheme.Base.ToolBar</item>
+        <item name="tabBarStyle">@style/AppTheme.TabBar.Base</item>
         <item name="android:actionModeBackground">@color/colorPrimary</item>
     </style>
 
@@ -71,6 +87,7 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="toolbarStyle">@style/AppTheme.Base.ToolBar</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
@@ -114,6 +131,7 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="toolbarStyle">@style/AppTheme.Base.ToolBar</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
@@ -124,5 +142,64 @@
 
     <!-- AppBarOverlay theme. Common to all theme -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!-- White theme -->
+    <style name="AppTheme.White.Base" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimaryWhite</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkWhite</item>
+        <item name="colorAccent">@color/colorAccentWhite</item>
+        <item name="actionBarStyle">@style/AppTheme.White.ActionBarStyle</item>
+        <item name="actionBarTheme">@style/AppTheme.White.ActionBarTheme</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.White" parent="AppTheme.White.Base">
+
+    </style>
+
+    <style name="AppTheme.White.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- THIS is where you can color the arrow! -->
+        <item name="colorControlNormal">@color/actionBarStyle_white</item>
+    </style>
+
+    <style name="AppTheme.White.ActionBarStyle" parent="@style/Widget.AppCompat.ActionBar.Solid">
+        <item name="titleTextStyle">@style/AppTheme.White.ActionBarStyle.Title</item>
+        <item name="colorControlNormal">@color/actionBarStyle_white</item>
+    </style>
+
+    <style name="AppTheme.White.ActionBarStyle.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/actionBarStyle_white</item>
+    </style>
+
+    <style name="AppTheme.White.ToolBar" parent="Theme.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/actionBarStyle_white</item>
+        <item name="android:textColorSecondary">@color/actionBarStyle_white</item>
+        <item name="actionMenuTextColor">@color/actionBarStyle_white</item>
+    </style>
+
+    <style name="AppTheme.TabBar.White" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/AppTheme.TabText.White</item>
+        <item name="tabSelectedTextColor">@color/tabbarStyle_white</item>
+    </style>
+
+    <style name="AppTheme.TabText.White" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="AppTheme.White.NoActionBar" parent="AppTheme.White">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+        <item name="selected_app_check">@drawable/ic_check_circle_black_18dp</item>
+        <item name="cardStyle">@style/CardView</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="toolbarStyle">@style/AppTheme.White.ToolBar</item>
+        <item name="tabBarStyle">@style/AppTheme.TabBar.White</item>
+        <item name="android:actionModeBackground">@color/colorPrimary</item>
+    </style>
 
 </resources>
