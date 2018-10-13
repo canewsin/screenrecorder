@@ -152,6 +152,26 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         dirChooser.setCurrentDir(getValue(getString(R.string.savelocation_key), defaultSaveLoc));
         cameraOverlay = (CheckBoxPreference) findPreference(getString(R.string.preference_camera_overlay_key));
 
+        Preference magiskDownload = findPreference(getString(R.string.preference_magisk_download_key));
+        magiskDownload.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent downloadURL = new Intent(Intent.ACTION_VIEW);
+                downloadURL.setData(Uri.parse("https://screenrecorder.orpheusdroid.com/downloads/magisk/"));
+                startActivity(new Intent(downloadURL));
+                return false;
+            }
+        });
+
+        Preference faq = findPreference(getString(R.string.preference_faq_key));
+        faq.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startActivity(new Intent(getActivity(), FAQActivity.class));
+                return false;
+            }
+        });
+
         ListPreference orientation = (ListPreference) findPreference(getString(R.string.orientation_key));
         orientation.setSummary(orientation.getEntry());
 
@@ -518,11 +538,17 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         new AlertDialog.Builder(activity)
                 .setTitle(R.string.alert_dialog_internal_audio_warning_title)
                 .setMessage(message)
-                .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         requestAudioPermission(requestCode);
 
+                    }
+                })
+                .setNeutralButton(R.string.alert_dialog_internal_audio_warning_faq_text, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startActivity(new Intent(getActivity(), FAQActivity.class));
                     }
                 })
                 .setNegativeButton(R.string.alert_dialog_internal_audio_warning_negative_btn_text, new DialogInterface.OnClickListener() {

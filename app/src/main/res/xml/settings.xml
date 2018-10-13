@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2016. Vijai Chandra Prasad R.
+  ~ Copyright (c) 2016-2018. Vijai Chandra Prasad R.
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -142,21 +142,27 @@
             android:defaultValue="none"
             android:dependency="@string/preference_enable_target_app_key"/>
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="@string/prefs_category_experimental_title"
-        >
+    <PreferenceCategory android:title="@string/preference_category_misc_title">
+        <Preference
+            android:key="@string/preference_magisk_download_key"
+            android:summary="@string/preference_magisk_download_summary"
+            android:title="@string/preference_magisk_download_title" />
+        <Preference
+            android:key="@string/preference_faq_key"
+            android:summary="@string/preference_faq_summary"
+            android:title="@string/preference_faq_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/prefs_category_experimental_title">
         <CheckBoxPreference
             android:title="@string/preference_save_gif_title"
             android:summary="@string/preference_save_gif_summary"
             android:key="@string/preference_save_gif_key"
-            android:defaultValue="false"
-            />
+            android:defaultValue="false" />
         <CheckBoxPreference
             android:title="@string/preference_shake_gesture_title"
             android:summary="@string/preference_shake_gesture_summary"
             android:key="@string/preference_shake_gesture_key"
-            android:defaultValue="false"
-            />
+            android:defaultValue="false" />
         <Preference
             android:title=""
             android:summary=""
