@@ -332,6 +332,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        String intentAction = getIntent().getAction();
+
         //Result for system windows permission required to show floating controls
         if (requestCode == Const.FLOATING_CONTROLS_SYSTEM_WINDOWS_CODE || requestCode == Const.CAMERA_SYSTEM_WINDOWS_CODE) {
             setSystemWindowsPermissionResult(requestCode);
@@ -343,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,
                     getString(R.string.screen_recording_permission_denied), Toast.LENGTH_SHORT).show();
             //Return to home screen if the app was started from app shortcut
-            if (getIntent().getAction().equals(getString(R.string.app_shortcut_action)))
+            if (intentAction != null && intentAction.equals(getString(R.string.app_shortcut_action)))
                 this.finish();
             return;
 
@@ -356,6 +358,9 @@ public class MainActivity extends AppCompatActivity {
         recorderService.putExtra(Const.RECORDER_INTENT_DATA, data);
         recorderService.putExtra(Const.RECORDER_INTENT_RESULT, resultCode);
         startService(recorderService);
+
+        if (intentAction != null && intentAction.equals(getString(R.string.app_shortcut_action)))
+            this.finish();
     }
 
 
