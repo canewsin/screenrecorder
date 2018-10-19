@@ -416,14 +416,14 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                     break;
                 case "2":
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
-                    mMediaRecorder.setAudioEncodingBitRate(320 * 96000);
-                    mMediaRecorder.setAudioSamplingRate(96000);
+                    mMediaRecorder.setAudioEncodingBitRate(320 * 1000);
+                    mMediaRecorder.setAudioSamplingRate(48000);
                     mustRecAudio = true;
                     break;
                 case "3":
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.REMOTE_SUBMIX);
-                    mMediaRecorder.setAudioEncodingBitRate(384000);
-                    mMediaRecorder.setAudioSamplingRate(44100);
+                    mMediaRecorder.setAudioEncodingBitRate(320 * 1000);
+                    mMediaRecorder.setAudioSamplingRate(48000);
                     mustRecAudio = true;
                     break;
             }
