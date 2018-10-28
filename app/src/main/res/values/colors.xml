@@ -17,6 +17,9 @@
   -->
 
 <resources>
+
+    <color name="ic_launcher_background">#FFFFFF</color>
+
     <color name="multiSelectColor">#503b3b3b</color>
 
     <!-- Light theme color resources -->
