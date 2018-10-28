@@ -451,7 +451,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         NotificationChannel recordingNotificationChannel = new NotificationChannel(
                 Const.RECORDING_NOTIFICATION_CHANNEL_ID,
                 Const.RECORDING_NOTIFICATION_CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
         );
         recordingNotificationChannel.enableLights(true);
         recordingNotificationChannel.setLightColor(Color.RED);
@@ -479,7 +479,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
      * API24 */
     private NotificationCompat.Builder createRecordingNotification(NotificationCompat.Action action) {
         Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                R.mipmap.ic_launcher);
+                R.mipmap.ic_notification_big);
 
         Intent recordStopIntent = new Intent(this, RecorderService.class);
         recordStopIntent.setAction(Const.SCREEN_RECORDING_STOP);
@@ -497,7 +497,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 .setUsesChronometer(true)
                 .setOngoing(true)
                 .setContentIntent(notificationContentIntent)
-                .setPriority(NotificationManager.IMPORTANCE_DEFAULT)
+                .setPriority(Notification.PRIORITY_MAX)
                 .addAction(R.drawable.ic_notification_stop, getResources().getString(R.string.screen_recording_notification_action_stop),
                         precordStopIntent);
         if (action != null)
@@ -507,7 +507,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
 
     private void showShareNotification() {
         Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                R.mipmap.ic_launcher);
+                R.mipmap.ic_notification_big);
 
         Uri videoUri = FileProvider.getUriForFile(
                 this, this.getApplicationContext().getPackageName() + ".provider",
