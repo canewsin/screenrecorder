@@ -559,6 +559,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                         requestAudioPermission(Const.INTERNAL_AUDIO_REQUEST_CODE);
                     }
                 })
+                .setCancelable(false)
                 .create()
                 .show();
     }
