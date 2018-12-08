@@ -96,11 +96,11 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
-    implementation 'ly.count.android:sdk:18.08'
+    implementation 'ly.count.android:sdk:18.08.1'
     implementation 'life.knowledge4:k4l-video-trimmer:1.0'
     implementation 'com.github.google:cameraview:3eaeac09a7f'
 
