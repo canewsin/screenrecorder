@@ -77,6 +77,8 @@ public class AboutActivity extends AppCompatActivity {
         TextView videoEditorCredit = findViewById(R.id.video_editor_lib_credit_tv);
         TextView analyticsCredit = findViewById(R.id.analytics_lib_credit_tv);
         TextView openSourceInfo = findViewById(R.id.opensource_info_tv);
+        TextView iapLibrary = findViewById(R.id.iap_lib_credit_tv);
+        TextView changelogLib = findViewById(R.id.changelog_lib_credit_tv);
 
         iconCredit.setText(getString(R.string.app_icon_credit_Niko, "Niko Hörkkö", "http://nikosite.net"));
         videoEditorCredit.setText(getString(R.string.video_editor_library_credit, "knowledge4life",
@@ -86,6 +88,12 @@ public class AboutActivity extends AppCompatActivity {
                 "https://github.com/Countly/countly-sdk-android",
                 "MIT Opensource License"));
         openSourceInfo.setText(getString(R.string.opensource_info, "https://gitlab.com/vijai/screenrecorder", "GNU AGPLv3"));
+        iapLibrary.setText(getString(R.string.iap_library_credit, "serso",
+                "https://github.com/serso/android-checkout",
+                "Apache 2.0"));
+        changelogLib.setText(getString(R.string.changelog_library_credit, "MFlisar",
+                "https://github.com/MFlisar/changelog",
+                "Apache 2.0"));
 
         //Let's build the copyright text using String builder
         StringBuilder copyRight = new StringBuilder();
