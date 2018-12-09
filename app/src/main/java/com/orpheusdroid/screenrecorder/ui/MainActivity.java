@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (prefs.getInt(Const.CHANGELOG_VER, 0) < BuildConfig.VERSION_CODE) {
             showChangeLog();
-            //prefs.edit().putInt(Const.CHANGELOG_VER, BuildConfig.VERSION_CODE).apply();
+            prefs.edit().putInt(Const.CHANGELOG_VER, BuildConfig.VERSION_CODE).apply();
         }
     }
 
