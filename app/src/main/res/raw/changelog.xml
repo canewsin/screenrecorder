@@ -3,8 +3,8 @@
     <!-- simple example - no version name => will be generated based on verionCode: 100 => v1.00 -->
     <release
         date="08-Dec-2018"
-        versionCode="29"
-        versionName="1.8.8">
+        versionCode="30"
+        versionName="2.0.0">
         <new>Internal Audio Recording</new>
         <new type="summary">In app FAQ</new>
         <new>Camera overlay. Now record your own face with a front facing/rear facing camera
