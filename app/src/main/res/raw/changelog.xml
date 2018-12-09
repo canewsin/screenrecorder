@@ -1,0 +1,19 @@
+<changelog>
+
+    <!-- simple example - no version name => will be generated based on verionCode: 100 => v1.00 -->
+    <release
+        date="08-Dec-2018"
+        versionCode="29"
+        versionName="1.8.8">
+        <new>Internal Audio Recording</new>
+        <new type="summary">In app FAQ</new>
+        <new>Camera overlay. Now record your own face with a front facing/rear facing camera
+            overlay
+        </new>
+        <bugfix>Prevent FC while deleting multiple files in some cases</bugfix>
+        <bugfix>Bug fixes and improvements</bugfix>
+        <info>Read the faq for more about internal audio recording. FAQ can be found in the
+            overflow(3 vertical dot) menu
+        </info>
+    </release>
+</changelog>

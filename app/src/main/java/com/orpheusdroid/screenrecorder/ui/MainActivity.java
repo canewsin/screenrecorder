@@ -45,6 +45,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.michaelflisar.changelog.ChangelogBuilder;
 import com.orpheusdroid.screenrecorder.BuildConfig;
 import com.orpheusdroid.screenrecorder.Const;
 import com.orpheusdroid.screenrecorder.DonateActivity;
@@ -235,6 +236,20 @@ public class MainActivity extends AppCompatActivity {
             requestAnalyticsPermission();
 
         Countly.onCreate(this);
+
+        if (prefs.getInt(Const.CHANGELOG_VER, 0) < BuildConfig.VERSION_CODE) {
+            showChangeLog();
+            //prefs.edit().putInt(Const.CHANGELOG_VER, BuildConfig.VERSION_CODE).apply();
+        }
+    }
+
+
+    private void showChangeLog() {
+        ChangelogBuilder builder = new ChangelogBuilder()
+                .withUseBulletList(true)
+                .withMinVersionToShow(29)
+                .withManagedShowOnStart(false);
+        builder.buildAndShowDialog(this, false);
     }
 
     /**

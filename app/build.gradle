@@ -71,6 +71,11 @@ android {
             manifest.srcFile 'src/playstore/AndroidManifest.xml'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 static def getAppKey(String property){
@@ -103,6 +108,7 @@ dependencies {
     implementation 'ly.count.android:sdk:18.08.1'
     implementation 'life.knowledge4:k4l-video-trimmer:1.0'
     implementation 'com.github.google:cameraview:3eaeac09a7f'
+    implementation 'com.github.MFlisar:changelog:1.1.2'
 
     playstoreImplementation 'org.solovyev.android:checkout:1.2.1'
     playstoreDonateImplementation 'org.solovyev.android:checkout:1.2.1'

@@ -81,6 +81,7 @@ public class Const {
     public static final String ANALYTICS_URL = "https://analytics.orpheusdroid.com";
     public static final String ANALYTICS_API_KEY = "07273a5c91f8a932685be1e3ad0d160d3de6d4ba";
     public static final String COUNTLY_USAGE_STATS_GROUP_NAME = "analytics_group";
+    public static final String CHANGELOG_VER = "Changelog_ver";
 
     public static final String PREFS_REQUEST_ANALYTICS_PERMISSION = "request_analytics_permission";
     public static final String PREFS_WHITE_THEME = "white_theme";
