@@ -110,15 +110,19 @@ public class AboutActivity extends AppCompatActivity {
                     .append(" V")
                     .append(BuildConfig.VERSION_NAME)
                     .append("\n Internal Build. Not to be released");
-            //set the text as html to get copyright symbol
-            appVersion.setText(fromHtml(copyRight.toString()));
         } else {
             copyRight.append(getResources().getString(R.string.app_name))
                     .append(" V")
                     .append(BuildConfig.VERSION_NAME);
-            //set the text as html to get copyright symbol
-            appVersion.setText(fromHtml(copyRight.toString()));
         }
+
+        if (Const.IS_MAGISK_MODE)
+            copyRight.append(" (Magisk Mode) ");
+        else
+            copyRight.append(" (Normal Mode) ");
+
+        //set the text as html to get copyright symbol
+        appVersion.setText(fromHtml(copyRight.toString()));
     }
 
     @Override

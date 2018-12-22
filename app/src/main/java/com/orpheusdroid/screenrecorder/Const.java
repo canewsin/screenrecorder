@@ -91,6 +91,8 @@ public class Const {
     public static final String PREFS_CAMERA_OVERLAY_POS = "camera_overlay_pos";
     public static final String PREFS_INTERNAL_AUDIO_DIALOG_KEY = "int_audio_diag";
 
+    public static boolean IS_MAGISK_MODE;
+
     public enum RecordingState {
         RECORDING, PAUSED, STOPPED
     }
