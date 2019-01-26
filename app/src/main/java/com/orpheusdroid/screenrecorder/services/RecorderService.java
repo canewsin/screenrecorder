@@ -56,6 +56,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.orpheusdroid.screenrecorder.Const;
+import com.orpheusdroid.screenrecorder.DemoMode.DemoModeController;
 import com.orpheusdroid.screenrecorder.R;
 import com.orpheusdroid.screenrecorder.gesture.ShakeEventManager;
 import com.orpheusdroid.screenrecorder.ui.EditVideoActivity;
@@ -106,6 +107,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     private boolean isShakeGestureActive;
     private FloatingControlService floatingControlService;
     private boolean isBound = false;
+    private boolean showSysUIDemo = false;
     private NotificationManager mNotificationManager;
     Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -247,6 +249,9 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
             sendBroadcast(TouchIntent);
         }
 
+        if (showSysUIDemo)
+            DemoModeController.stopDemoMode(this);
+
         //The service is started as foreground service and hence has to be stopped
         stopForeground(true);
     }
@@ -319,6 +324,9 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     }
 
     private void startRecording() {
+        if (showSysUIDemo)
+            DemoModeController.allowDemoMode(this);
+
         //Initialize MediaRecorder class and initialize it with preferred configuration
         mMediaRecorder = new MediaRecorder();
         initRecorder();
@@ -579,6 +587,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
             saveDir.mkdirs();
         }
         useFloatingControls = prefs.getBoolean(getString(R.string.preference_floating_control_key), false);
+        showSysUIDemo = prefs.getBoolean(getString(R.string.preference_sysui_demo_mode_key), false);
         showCameraOverlay = prefs.getBoolean(getString(R.string.preference_camera_overlay_key), false);
         showTouches = prefs.getBoolean(getString(R.string.preference_show_touch_key), false);
         String saveFileName = getFileSaveName();

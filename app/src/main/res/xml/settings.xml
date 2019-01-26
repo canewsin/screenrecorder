@@ -163,6 +163,12 @@
             android:summary="@string/preference_shake_gesture_summary"
             android:key="@string/preference_shake_gesture_key"
             android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/preference_sysui_demo_mode_key"
+            android:summary="@string/preference_sysui_demo_mode_summary"
+            android:title="@string/preference_sysui_demo_mode_title" />
         <Preference
             android:title=""
             android:summary=""

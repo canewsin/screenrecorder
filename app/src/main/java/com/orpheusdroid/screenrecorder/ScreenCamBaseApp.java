@@ -22,6 +22,8 @@ import android.content.pm.ApplicationInfo;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.topjohnwu.superuser.BusyBox;
+
 import ly.count.android.sdk.Countly;
 import ly.count.android.sdk.DeviceId;
 
@@ -37,6 +39,8 @@ public class ScreenCamBaseApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        BusyBox.setup(this);
+
         int mask = ApplicationInfo.FLAG_SYSTEM | ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
         Const.IS_MAGISK_MODE = (getApplicationInfo().flags & mask) != 0;
     }

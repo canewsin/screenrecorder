@@ -17,11 +17,13 @@
 
 package com.orpheusdroid.screenrecorder.ui;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -44,11 +46,13 @@ import com.orpheusdroid.screenrecorder.R;
 import com.orpheusdroid.screenrecorder.folderpicker.FolderChooser;
 import com.orpheusdroid.screenrecorder.folderpicker.OnDirectorySelectedListerner;
 import com.orpheusdroid.screenrecorder.interfaces.PermissionResultListener;
+import com.topjohnwu.superuser.Shell;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 
@@ -107,6 +111,11 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
     private CheckBoxPreference cameraOverlay;
 
     /**
+     * SystemUI Demo Mode checkbox preference
+     */
+    private CheckBoxPreference systemUIDemo;
+
+    /**
      * MainActivity object
      */
     private MainActivity activity;
@@ -151,25 +160,20 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         //Set previously chosen directory as initial directory
         dirChooser.setCurrentDir(getValue(getString(R.string.savelocation_key), defaultSaveLoc));
         cameraOverlay = (CheckBoxPreference) findPreference(getString(R.string.preference_camera_overlay_key));
+        systemUIDemo = (CheckBoxPreference) findPreference(getString(R.string.preference_sysui_demo_mode_key));
 
         Preference magiskDownload = findPreference(getString(R.string.preference_magisk_download_key));
-        magiskDownload.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                Intent downloadURL = new Intent(Intent.ACTION_VIEW);
-                downloadURL.setData(Uri.parse("https://screenrecorder.orpheusdroid.com/downloads/magisk/"));
-                startActivity(new Intent(downloadURL));
-                return false;
-            }
+        magiskDownload.setOnPreferenceClickListener(preference -> {
+            Intent downloadURL = new Intent(Intent.ACTION_VIEW);
+            downloadURL.setData(Uri.parse("https://screenrecorder.orpheusdroid.com/downloads/magisk/"));
+            startActivity(new Intent(downloadURL));
+            return false;
         });
 
         Preference faq = findPreference(getString(R.string.preference_faq_key));
-        faq.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(getActivity(), FAQActivity.class));
-                return false;
-            }
+        faq.setOnPreferenceClickListener(preference -> {
+            startActivity(new Intent(getActivity(), FAQActivity.class));
+            return false;
         });
 
         ListPreference orientation = (ListPreference) findPreference(getString(R.string.orientation_key));
@@ -202,6 +206,11 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         if(touchPointer.isChecked()){
             if (!hasPluginInstalled())
                 touchPointer.setChecked(false);
+        }
+
+        if (!Const.IS_MAGISK_MODE) {
+            systemUIDemo.setChecked(false);
+            systemUIDemo.setEnabled(false);
         }
 
         //set callback for directory change
@@ -451,6 +460,12 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                             requestAudioPermission(Const.INTERNAL_AUDIO_REQUEST_CODE);
                         break;
                     case "3":
+                        if (!Const.IS_MAGISK_MODE) {
+                            Toast.makeText(getActivity(), getString(R.string.toast_magisk_module_required_message), Toast.LENGTH_SHORT).show();
+                            recaudio.setValue("0");
+                            break;
+                        }
+
                         if (!prefs.getBoolean(Const.PREFS_INTERNAL_AUDIO_DIALOG_KEY, false))
                             showInternalAudioWarning(true);
                         else
@@ -496,6 +511,25 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
             case R.string.preference_camera_overlay_title:
                 requestCameraPermission();
                 break;
+            case R.string.preference_sysui_demo_mode_title:
+                checkDUMPPermission();
+                break;
+        }
+    }
+
+    private void checkDUMPPermission() {
+        String permission = Manifest.permission.DUMP;
+        if (getActivity().checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+            int mask = ApplicationInfo.FLAG_SYSTEM | ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
+            if ((getActivity().getApplicationInfo().flags & mask) == 0) {
+                Toast.makeText(getActivity(), getString(R.string.toast_magisk_module_required_message), Toast.LENGTH_SHORT).show();
+                systemUIDemo.setChecked(false);
+            } else {
+                List<String> output = Shell.su("pm grant " + getActivity().getPackageName() + " android.permission.DUMP").exec().getOut();
+                for (String st : output) {
+                    Log.d(Const.TAG, st);
+                }
+            }
         }
     }
 

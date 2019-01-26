@@ -157,6 +157,10 @@
     <string name="preference_faq_title">FAQ</string>
     <string name="preference_faq_summary">Frequently Asked Questions and Answers</string>
     <string name="preference_category_misc_title">Misc</string>
+    <string name="preference_sysui_demo_mode_title">SystemUI Demo Mode</string>
+    <string name="toast_magisk_module_required_message">Magisk module is required</string>
+    <string name="preference_sysui_demo_mode_summary">Enable SystemUI Demo Mode</string>
+    <string name="preference_sysui_demo_mode_key">sysui_demo</string>
     <plurals name="delete_alert_title">
         <item quantity="zero">Delete video?</item>
         <item quantity="one">Delete video?</item>
