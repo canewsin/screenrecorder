@@ -188,9 +188,6 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                         mShakeDetector = new ShakeEventManager(this);
                         mShakeDetector.init(this);
 
-                        Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                                R.mipmap.ic_launcher);
-
                         Intent destroyMediaRecorderIntent = new Intent(this, RecorderService.class);
                         destroyMediaRecorderIntent.setAction(Const.SCREEN_RECORDING_DESTORY_SHAKE_GESTURE);
                         PendingIntent pdestroyMediaRecorderIntent = PendingIntent.getService(this, 0, destroyMediaRecorderIntent, 0);
@@ -201,8 +198,8 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                                         .setContentText("Shake your device to start recording or press this notification to cancel")
                                         .setOngoing(true)
                                         .setSmallIcon(R.drawable.ic_notification)
-                                        .setLargeIcon(
-                                                Bitmap.createScaledBitmap(icon, 128, 128, false))
+                                        .setLargeIcon((BitmapFactory.decodeResource(this.getResources(),
+                                                R.mipmap.ic_launcher)))
                                         .setContentIntent(pdestroyMediaRecorderIntent);
 
                         startNotificationForeGround(shakeGestureWaitNotification.build(), Const.SCREEN_RECORDER_SHARE_NOTIFICATION_ID);
@@ -313,12 +310,11 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
 
         //Send a broadcast receiver to the plugin app to enable show touches since the recording is resumed
         if (showTouches) {
-            if (showTouches) {
-                Intent TouchIntent = new Intent();
-                TouchIntent.setAction("com.orpheusdroid.screenrecorder.SHOWTOUCH");
-                TouchIntent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-                sendBroadcast(TouchIntent);
-            }
+            Intent TouchIntent = new Intent();
+            TouchIntent.setAction("com.orpheusdroid.screenrecorder.SHOWTOUCH");
+            TouchIntent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+            sendBroadcast(TouchIntent);
+
         }
     }
 
