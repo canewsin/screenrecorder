@@ -1,5 +1,12 @@
 <changelog>
-
+    <release
+        date="02-Feb-2019"
+        versionCode="31"
+        versionName="2.0.1">
+        <bugfix>Prevent crash while starting to record on some devices</bugfix>
+        <new type="summary">SystemUI Demo Mode (Experimental, Requires root)</new>
+        <new>About screen now shows if the app is running in magisk mode (or normal mode)</new>
+    </release>
     <!-- simple example - no version name => will be generated based on verionCode: 100 => v1.00 -->
     <release
         date="08-Dec-2018"
