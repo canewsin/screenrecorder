@@ -161,6 +161,7 @@
     <string name="toast_magisk_module_required_message">Magisk module is required</string>
     <string name="preference_sysui_demo_mode_summary">Enable SystemUI Demo Mode</string>
     <string name="preference_sysui_demo_mode_key">sysui_demo</string>
+    <string name="toast_msg_root_failed">Acquiring root access failed.</string>
     <plurals name="delete_alert_title">
         <item quantity="zero">Delete video?</item>
         <item quantity="one">Delete video?</item>

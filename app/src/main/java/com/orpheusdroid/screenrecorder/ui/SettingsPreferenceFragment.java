@@ -512,7 +512,12 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                 requestCameraPermission();
                 break;
             case R.string.preference_sysui_demo_mode_title:
-                checkDUMPPermission();
+                if (Shell.rootAccess())
+                    checkDUMPPermission();
+                else {
+                    systemUIDemo.setChecked(false);
+                    Toast.makeText(getActivity(), getString(R.string.toast_msg_root_failed), Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
