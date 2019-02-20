@@ -45,6 +45,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.os.StatFs;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -86,10 +87,10 @@ import androidx.core.content.FileProvider;
 //TODO: Update icons for notifcation
 public class RecorderService extends Service implements ShakeEventManager.ShakeListener {
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
-    private static int WIDTH, HEIGHT, FPS, DENSITY_DPI;
-    private static int BITRATE;
-    private static String audioRecSource;
-    private static String SAVEPATH;
+    private int WIDTH, HEIGHT, FPS, DENSITY_DPI;
+    private int BITRATE;
+    private String audioRecSource;
+    private String SAVEPATH;
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 0);
@@ -99,6 +100,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     }
 
     private int screenOrientation;
+    private String saveLocation;
 
     private boolean isRecording;
     private boolean useFloatingControls;
@@ -436,6 +438,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
             mMediaRecorder.setOutputFile(SAVEPATH);
             mMediaRecorder.setVideoSize(WIDTH, HEIGHT);
             mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
+            mMediaRecorder.setMaxFileSize(getFreeSpaceInBytes());
             if (mustRecAudio)
                 mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             mMediaRecorder.setVideoEncodingBitRate(BITRATE);
@@ -446,6 +449,13 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private long getFreeSpaceInBytes() {
+        StatFs FSStats = new StatFs(saveLocation);
+        long bytesAvailable = FSStats.getAvailableBytes();// * FSStats.getBlockCountLong();
+        Log.d(Const.TAG, "Free space in GB: " + bytesAvailable / (1000 * 1000 * 1000));
+        return bytesAvailable;
     }
 
     //Add notification channel for supporting Notification in Api 26 (Oreo)
@@ -580,7 +590,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         FPS = Integer.parseInt(prefs.getString(getString(R.string.fps_key), "30"));
         BITRATE = Integer.parseInt(prefs.getString(getString(R.string.bitrate_key), "7130317"));
         audioRecSource = prefs.getString(getString(R.string.audiorec_key), "0");
-        String saveLocation = prefs.getString(getString(R.string.savelocation_key),
+        saveLocation = prefs.getString(getString(R.string.savelocation_key),
                 Environment.getExternalStorageDirectory() + File.separator + Const.APPDIR);
         File saveDir = new File(saveLocation);
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) && !saveDir.isDirectory()) {
