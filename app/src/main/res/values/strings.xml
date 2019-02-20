@@ -147,13 +147,13 @@
     <string name="preference_camera_overlay_key" translatable="false">camera_overlay</string>
     <string name="alert_dialog_internal_audio_warning_title">Warning</string>
     <string name="alert_dialog_internal_audio_warning_message">Internal audio recording usually records along with mic audio.\nAlso, it does not work on all phones (Confirmed working on OnePlus, Xiaomi, and few Moto phones). You might try your luck</string>
-    <string name="alert_dialog_r_submix_audio_warning_message">Recording internal audio using submix will require you to install the magisk systemizer module which is in closed beta now. Join the support group to download the module.\nNote: This will force close the app if the module is not installed. Read FAQ to know more</string>
+    <string name="alert_dialog_r_submix_audio_warning_message">Recording internal audio using submix will require you to install the magisk systemizer module. Make sure the module is installed.\nNote: This will force close the app if the module is not installed. Read FAQ to know more</string>
     <string name="alert_dialog_internal_audio_warning_faq_text">Show FAQ</string>
     <string name="alert_dialog_internal_audio_warning_negative_btn_text">Do not show this message again</string>
     <string name="preference_magisk_download_key" translatable="false">magisk_download_key</string>
     <string name="preference_faq_key" translatable="false">faq</string>
     <string name="preference_magisk_download_title">ScreenCam Magisk Module</string>
-    <string name="preference_magisk_download_summary">Download magisk module for enabling internal call recording</string>
+    <string name="preference_magisk_download_summary">Download magisk module for enabling internal audio recording</string>
     <string name="preference_faq_title">FAQ</string>
     <string name="preference_faq_summary">Frequently Asked Questions and Answers</string>
     <string name="preference_category_misc_title">Misc</string>
