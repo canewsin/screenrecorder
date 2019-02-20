@@ -622,7 +622,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
      * Method to concat file prefix with dateTime format
      */
     public String getFileSaveFormat() {
-        String filename = prefs.getString(getString(R.string.filename_key), "yyyyMMdd_hhmmss");
+        String filename = prefs.getString(getString(R.string.filename_key), "yyyyMMdd_HHmmss").replace("hh", "HH");
         String prefix = prefs.getString(getString(R.string.fileprefix_key), "recording");
         return prefix + "_" + filename;
     }

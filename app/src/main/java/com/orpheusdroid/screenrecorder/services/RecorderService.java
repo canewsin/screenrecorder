@@ -661,7 +661,10 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
 
     //Return filename of the video to be saved formatted as chosen by the user
     private String getFileSaveName() {
-        String filename = prefs.getString(getString(R.string.filename_key), "yyyyMMdd_hhmmss");
+        String filename = prefs.getString(getString(R.string.filename_key), "yyyyMMdd_HHmmss");
+
+        //Required to handle preference change
+        filename = filename.replace("hh", "HH");
         String prefix = prefs.getString(getString(R.string.fileprefix_key), "recording");
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat(filename);

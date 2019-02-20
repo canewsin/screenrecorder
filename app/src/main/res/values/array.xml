@@ -74,14 +74,14 @@
     </string-array>
 
     <string-array name="filename" translatable="false">
-        <item>yyyyMMdd_hhmmss</item>
-        <item>ddMMyyyy_hhmmss</item>
-        <item>yyMMdd_hhmmss</item>
-        <item>ddMMyy_hhmmss</item>
-        <item>hhMMss_yyyymmdd</item>
-        <item>hhMMss_ddmmyyyy</item>
-        <item>hhMMss_yymmdd</item>
-        <item>hhMMss_ddmmyy</item>
+        <item>yyyyMMdd_HHmmss</item>
+        <item>ddMMyyyy_HHmmss</item>
+        <item>yyMMdd_HHmmss</item>
+        <item>ddMMyy_HHmmss</item>
+        <item>HHMMss_yyyymmdd</item>
+        <item>HHMMss_ddmmyyyy</item>
+        <item>HHMMss_yymmdd</item>
+        <item>HHMMss_ddmmyy</item>
     </string-array>
 
     <string-array name="audioSettingsEntries">
