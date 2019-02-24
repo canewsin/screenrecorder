@@ -277,7 +277,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         Intent recordResumeIntent = new Intent(this, RecorderService.class);
         recordResumeIntent.setAction(Const.SCREEN_RECORDING_RESUME);
         PendingIntent precordResumeIntent = PendingIntent.getService(this, 0, recordResumeIntent, 0);
-        NotificationCompat.Action action = new NotificationCompat.Action(android.R.drawable.ic_media_play,
+        NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_play_arrow_white,
                 getString(R.string.screen_recording_notification_action_resume), precordResumeIntent);
         updateNotification(createRecordingNotification(action).setUsesChronometer(false).build(), Const.SCREEN_RECORDER_NOTIFICATION_ID);
         Toast.makeText(this, R.string.screen_recording_paused_toast, Toast.LENGTH_SHORT).show();
@@ -305,7 +305,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         Intent recordPauseIntent = new Intent(this, RecorderService.class);
         recordPauseIntent.setAction(Const.SCREEN_RECORDING_PAUSE);
         PendingIntent precordPauseIntent = PendingIntent.getService(this, 0, recordPauseIntent, 0);
-        NotificationCompat.Action action = new NotificationCompat.Action(android.R.drawable.ic_media_pause,
+        NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_pause_white,
                 getString(R.string.screen_recording_notification_action_pause), precordPauseIntent);
         updateNotification(createRecordingNotification(action).setUsesChronometer(true)
                 .setWhen((System.currentTimeMillis() - elapsedTime)).build(), Const.SCREEN_RECORDER_NOTIFICATION_ID);
@@ -392,7 +392,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
             Intent recordPauseIntent = new Intent(this, RecorderService.class);
             recordPauseIntent.setAction(Const.SCREEN_RECORDING_PAUSE);
             PendingIntent precordPauseIntent = PendingIntent.getService(this, 0, recordPauseIntent, 0);
-            NotificationCompat.Action action = new NotificationCompat.Action(android.R.drawable.ic_media_pause,
+            NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_pause_white,
                     getString(R.string.screen_recording_notification_action_pause), precordPauseIntent);
 
             //Start Notification as foreground
@@ -506,13 +506,15 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 .setContentTitle(getResources().getString(R.string.screen_recording_notification_title))
                 .setTicker(getResources().getString(R.string.screen_recording_notification_title))
                 .setSmallIcon(R.drawable.ic_notification)
-                .setLargeIcon(
-                        Bitmap.createScaledBitmap(icon, 128, 128, false))
+                //.setLargeIcon(
+                //Bitmap.createScaledBitmap(icon, 64, 64, false))
+                .setLargeIcon(icon)
                 .setUsesChronometer(true)
                 .setOngoing(true)
                 .setContentIntent(notificationContentIntent)
+                .setStyle(new androidx.media.app.NotificationCompat.MediaStyle())
                 .setPriority(Notification.PRIORITY_MAX)
-                .addAction(R.drawable.ic_notification_stop, getResources().getString(R.string.screen_recording_notification_action_stop),
+                .addAction(R.drawable.ic_stop_white, getResources().getString(R.string.screen_recording_notification_action_stop),
                         precordStopIntent);
         if (action != null)
             notification.addAction(action);
