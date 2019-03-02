@@ -331,6 +331,14 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
 
         //Initialize MediaRecorder class and initialize it with preferred configuration
         mMediaRecorder = new MediaRecorder();
+        mMediaRecorder.setOnErrorListener((mr, what, extra) -> {
+            Log.e(Const.TAG, "Screencam Error: " + what + ", Extra: " + extra);
+            Toast.makeText(this, R.string.recording_failed_toast, Toast.LENGTH_SHORT).show();
+            destroyMediaProjection();
+        });
+        mMediaRecorder.setOnInfoListener((mr, what, extra) -> {
+            Log.d(Const.TAG, "Screencam Info: " + what + ", Extra: " + extra);
+        });
         initRecorder();
 
         //Set Callback for MediaProjection
