@@ -20,15 +20,21 @@ package com.orpheusdroid.screenrecorder.ui;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
-import android.webkit.WebView;
 
 import com.orpheusdroid.screenrecorder.Const;
 import com.orpheusdroid.screenrecorder.R;
+import com.orpheusdroid.screenrecorder.adapter.FAQAdapter;
+import com.orpheusdroid.screenrecorder.utils.FAQBuilder;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import static com.topjohnwu.superuser.internal.InternalUtils.getContext;
 
 public class FAQActivity extends AppCompatActivity {
+    private RecyclerView FAQView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +60,17 @@ public class FAQActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ((WebView) findViewById(R.id.wv_privacy_policy)).loadUrl("file:///android_asset/faq.html");
+
+        FAQView = findViewById(R.id.faq_rv);
+        RecyclerView.LayoutManager recyclerViewLayoutManager = new LinearLayoutManager(getContext());
+        FAQView.setLayoutManager(recyclerViewLayoutManager);
+        FAQAdapter recyclerViewAdapter = new FAQAdapter(FAQBuilder.getInstance(this).buildFAQ());
+
+        // set custom adapter to recycler view
+        FAQView.setAdapter(recyclerViewAdapter);
+
+        // Set recycler view item click listener
+        //recyclerViewAdapter.setOnClick(this);
     }
 
     @Override

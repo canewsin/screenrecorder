@@ -9,3 +9,4 @@
 *.apk
 *.json
 /app_pub_key
+!faq.json
