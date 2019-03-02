@@ -44,7 +44,7 @@
     <string name="screen_recording_notification_action_stop">Stop</string>
     <string name="screen_recording_notification_action_pause">Pause</string>
     <string name="screen_recording_notification_action_resume">Resume</string>
-    <string name="fatal_exception_message">ScreenRecorder: Fatal Exception occurred. Log has been sent</string>
+    <string name="fatal_exception_message">ScreenRecorder: Saving video failed! Log will be sent if enabled.</string>
     <string name="about_activity_label">About</string>
     <string name="snackbar_storage_permission_message">Grant storage perm</string>
     <string name="snackbar_storage_permission_action_enable">ENABLE</string>
