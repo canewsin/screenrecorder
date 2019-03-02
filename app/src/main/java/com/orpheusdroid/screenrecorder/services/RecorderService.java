@@ -693,6 +693,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 mMediaProjection.stop();
                 mMediaProjection = null;
             }
+            stopSelf();
         }
         isRecording = false;
     }
