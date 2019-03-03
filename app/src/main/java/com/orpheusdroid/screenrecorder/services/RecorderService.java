@@ -34,6 +34,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
+import android.media.AudioManager;
 import android.media.MediaRecorder;
 import android.media.MediaScannerConnection;
 import android.media.projection.MediaProjection;
@@ -418,6 +419,14 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 /*Handler*/);
     }
 
+    public int getBestSampleRate() {
+        AudioManager am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+        String sampleRateString = am.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
+        int samplingRate = (sampleRateString == null) ? 44100 : Integer.parseInt(sampleRateString);
+        Log.d(Const.TAG, "Sampling rate: " + samplingRate);
+        return samplingRate;
+    }
+
     /* Initialize MediaRecorder with desired default values and values set by user. Everything is
      * pretty much self explanatory */
     private void initRecorder() {
@@ -431,13 +440,13 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 case "2":
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
                     mMediaRecorder.setAudioEncodingBitRate(320 * 1000);
-                    mMediaRecorder.setAudioSamplingRate(48000);
+                    mMediaRecorder.setAudioSamplingRate(getBestSampleRate());
                     mustRecAudio = true;
                     break;
                 case "3":
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.REMOTE_SUBMIX);
                     mMediaRecorder.setAudioEncodingBitRate(320 * 1000);
-                    mMediaRecorder.setAudioSamplingRate(48000);
+                    mMediaRecorder.setAudioSamplingRate(getBestSampleRate());
                     mustRecAudio = true;
                     break;
             }
