@@ -28,6 +28,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menu_faq"
+        android:title="@string/preference_faq_title"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/donate"
         android:title="@string/menu_donate"
         app:showAsAction="never" />

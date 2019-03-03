@@ -213,16 +213,13 @@ public class MainActivity extends AppCompatActivity {
         if (isServiceRunning(RecorderService.class)) {
             Log.d(Const.TAG, "service is running");
         }
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mMediaProjection == null && !isServiceRunning(RecorderService.class)) {
-                    //Request Screen recording permission
-                    startActivityForResult(mProjectionManager.createScreenCaptureIntent(), Const.SCREEN_RECORD_REQUEST_CODE);
-                } else if (isServiceRunning(RecorderService.class)) {
-                    //stop recording if the service is already active and recording
-                    Toast.makeText(MainActivity.this, "Screen already recording", Toast.LENGTH_SHORT).show();
-                }
+        fab.setOnClickListener(view -> {
+            if (mMediaProjection == null && !isServiceRunning(RecorderService.class)) {
+                //Request Screen recording permission
+                startActivityForResult(mProjectionManager.createScreenCaptureIntent(), Const.SCREEN_RECORD_REQUEST_CODE);
+            } else if (isServiceRunning(RecorderService.class)) {
+                //stop recording if the service is already active and recording
+                Toast.makeText(MainActivity.this, "Screen already recording", Toast.LENGTH_SHORT).show();
             }
         });
         fab.setOnLongClickListener(new View.OnLongClickListener() {
@@ -598,6 +595,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.privacy_policy:
                 startActivity(new Intent(this, PrivacyPolicy.class));
+                return true;
+            case R.id.menu_faq:
+                startActivity(new Intent(this, FAQActivity.class));
                 return true;
             case R.id.donate:
                 startActivity(new Intent(this, DonateActivity.class));
