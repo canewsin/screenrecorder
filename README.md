@@ -16,7 +16,6 @@ Telegram: [https://goo.gl/TDs42r](https://goo.gl/TDs42r)
 Slack:    Comming soon!
 
 ## Donation/Payments
-#### Bitcoin:     1Cbf61y8XNx3BLWvoZB71x4XgBKB7r8BuB
 #### PayPal:      [![Paypal Donate](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/gold-pill-paypal-26px.png)](https://paypal.me/vijaichander/5)
 #### Flattr:      [![Flattr this git repo](https://button.flattr.com/flattr-badge-large.png)](https://flattr.com/submit/auto?fid=66ngyo&url=https%3A%2F%2Fgithub.com%2Fvijai1996%2Fscreenrecorder)
 
@@ -77,7 +76,7 @@ If you notice any content which seem to be infringing, please fill the below goo
 
 ## Authors
 
-* **Vijai Chander** - *Initial work* - [vijai1996](https://github.com/vijai1996)
+* **Vijai Chander** - *Initial work* - [vijai](https://gitlab.com/vijai)
 
 ## License
 
