@@ -1,5 +1,17 @@
 <changelog>
     <release
+        date="03-Mar-2019"
+        versionCode="32"
+        versionName="2.0.2">
+        <bugfix>Fix 3.8GB file limit while recording</bugfix>
+        <bugfix>Fix timestamp issue on recorded video file name</bugfix>
+        <bugfix>Change notification type from default to media style</bugfix>
+        <bugfix>Handle force close while recording fails</bugfix>
+        <bugfix>Fix crackling noise while recording internal audio in some cases</bugfix>
+        <new type="summary">New FAQ collapsible style view</new>
+        <new type="summary">Added 360P recording</new>
+    </release>
+    <release
         date="02-Feb-2019"
         versionCode="31"
         versionName="2.0.1">
