@@ -26,7 +26,7 @@ import android.service.quicksettings.TileService;
 
 import com.orpheusdroid.screenrecorder.Const;
 import com.orpheusdroid.screenrecorder.R;
-import com.orpheusdroid.screenrecorder.ui.MainActivity;
+import com.orpheusdroid.screenrecorder.ui.ShortcutActionActivity;
 
 /**
  * Todo: Add class description here
@@ -51,8 +51,8 @@ public class QuickRecordTile extends TileService {
         isTileActive = !(tile.getState() == Tile.STATE_ACTIVE);
         changeTileState();
         if (isTileActive) {
-            startActivity(
-                    new Intent(this, MainActivity.class)
+            startActivityAndCollapse(
+                    new Intent(this, ShortcutActionActivity.class)
                             .setAction(getString(R.string.app_shortcut_action))
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             );

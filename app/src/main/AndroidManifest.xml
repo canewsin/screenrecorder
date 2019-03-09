@@ -69,6 +69,10 @@
                 android:resource="@xml/shortcut" />
         </activity>
 
+        <activity
+            android:name=".ui.ShortcutActionActivity"
+            android:theme="@style/AppTheme.Transparent" />
+
         <service
             android:name=".services.RecorderService"
             android:exported="false" />
