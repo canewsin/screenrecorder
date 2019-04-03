@@ -18,7 +18,6 @@
 package com.orpheusdroid.screenrecorder;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
@@ -71,12 +70,10 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
         CardView donate1 = findViewById(R.id.donate_1);
         CardView donate2 = findViewById(R.id.donate_2);
         CardView donate5 = findViewById(R.id.donate_5);
-        CardView donatePayPal = findViewById(R.id.donate_paypal);
 
         donate1.setOnClickListener(this);
         donate2.setOnClickListener(this);
         donate5.setOnClickListener(this);
-        donatePayPal.setOnClickListener(this);
 
         setupPurchase();
     }
@@ -145,12 +142,6 @@ public class DonateActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.donate_5:
                 makePurchase("sku_5");
-                break;
-            case R.id.donate_paypal:
-                String url = "http://paypal.me/vijaichander/5";
-                Intent donateURL = new Intent(Intent.ACTION_VIEW);
-                donateURL.setData(Uri.parse(url));
-                startActivity(donateURL);
                 break;
         }
     }
