@@ -1,5 +1,11 @@
 <changelog>
     <release
+        date="03-Apr-2019"
+        versionCode="33"
+        versionName="2.0.3">
+        <info>Removed paypal donate option. Google doesn't like it apparently</info>
+    </release>
+    <release
         date="03-Mar-2019"
         versionCode="32"
         versionName="2.0.2">
