@@ -661,10 +661,27 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
         int width = metrics.widthPixels;
         width = Integer.parseInt(prefs.getString(getString(R.string.res_key), Integer.toString(width)));
         float aspectRatio = getAspectRatio(metrics);
-        String res = width + "x" + (int) (width * getAspectRatio(metrics));
+        int height = calculateClosestHeight(width, aspectRatio);
+        //String res = width + "x" + (int) (width * getAspectRatio(metrics));
+        String res = width + "x" + height;
         Log.d(Const.TAG, "resolution service: " + "[Width: "
                 + width + ", Height: " + width * aspectRatio + ", aspect ratio: " + aspectRatio + "]");
         return res;
+    }
+
+    private int calculateClosestHeight(int width, float aspectRatio) {
+        int calculatedHeight = (int) (width * aspectRatio);
+        Log.d(Const.TAG, "Calculated width=" + calculatedHeight);
+        Log.d(Const.TAG, "Aspect ratio: " + aspectRatio);
+        if (calculatedHeight / 16 != 0) {
+            int quotient = calculatedHeight / 16;
+            Log.d(Const.TAG, calculatedHeight + " not divisible by 16");
+
+            calculatedHeight = 16 * quotient;
+
+            Log.d(Const.TAG, "Maximum possible height is " + calculatedHeight);
+        }
+        return calculatedHeight;
     }
 
     private float getAspectRatio(DisplayMetrics metrics) {
