@@ -27,9 +27,9 @@
 
     <string-array name="resolutionsArray" translatable="false">
         <item>360P</item>
-        <item>720P (HD)</item>
-        <item>1080P (FHD)</item>
-        <item>1440P (QHD)</item>
+        <item>720P</item>
+        <item>1080P</item>
+        <item>1440P</item>
     </string-array>
 
     <string-array name="resolutionValues" translatable="false">

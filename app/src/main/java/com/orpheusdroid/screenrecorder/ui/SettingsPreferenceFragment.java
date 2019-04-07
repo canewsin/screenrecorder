@@ -183,8 +183,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         theme.setSummary(theme.getEntry());
 
         //Set the summary of preferences dynamically with user choice or default if no user choice is made
+        checkNativeRes(res);
         updateResolution(res);
-        updateScreenAspectRatio();
+        //updateScreenAspectRatio();
         fps.setSummary(getValue(getString(R.string.fps_key), "30"));
         float bps = bitsToMb(Integer.parseInt(getValue(getString(R.string.bitrate_key), "7130317")));
         bitrate.setSummary(bps + " Mbps");
@@ -215,6 +216,37 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
 
         //set callback for directory change
         dirChooser.setOnDirectoryClickedListerner(this);
+    }
+
+    private void checkNativeRes(ListPreference res) {
+
+        ArrayList<String> resEntries = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.resolutionsArray)));
+        ArrayList<String> resEntryValues = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.resolutionValues)));
+
+        String nativeRes = getNativeRes();
+
+        boolean hasValuesChanged = false;
+
+        for (String resolution : resEntryValues) {
+            if (Integer.parseInt(resolution) > Integer.parseInt(nativeRes)) {
+                resEntries.remove(resolution + "P");
+                resEntryValues.remove(resolution);
+                hasValuesChanged = true;
+                Log.d(Const.TAG, "Removed " + resolution + " from entries");
+            }
+        }
+
+        if (!resEntryValues.contains(nativeRes)) {
+            Log.d(Const.TAG, "Add native res! " + nativeRes);
+            resEntries.add(nativeRes + "P");
+            resEntryValues.add(nativeRes);
+            hasValuesChanged = true;
+        }
+
+        if (hasValuesChanged) {
+            res.setEntries(resEntries.toArray(new CharSequence[resEntries.size()]));
+            res.setEntryValues(resEntryValues.toArray(new CharSequence[resEntryValues.size()]));
+        }
     }
 
     private void checkAudioRecPermission() {
