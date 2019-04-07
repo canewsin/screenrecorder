@@ -57,6 +57,7 @@ import android.view.Surface;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.orpheusdroid.screenrecorder.BuildConfig;
 import com.orpheusdroid.screenrecorder.Const;
 import com.orpheusdroid.screenrecorder.DemoMode.DemoModeController;
 import com.orpheusdroid.screenrecorder.R;
@@ -543,7 +544,7 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                 R.mipmap.ic_notification_big);
 
         Uri videoUri = FileProvider.getUriForFile(
-                this, this.getApplicationContext().getPackageName() + ".provider",
+                this, BuildConfig.APPLICATION_ID + ".provider",
                 new File(SAVEPATH));
 
         Intent Shareintent = new Intent()
