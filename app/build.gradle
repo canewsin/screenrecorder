@@ -64,13 +64,6 @@ android {
             buildConfigField "String", "APP_PUB_KEY", getAppKey("app_pub_key_donate")
         }
     }
-    sourceSets {
-        playstoreDonate {
-            java.srcDirs = ['src/main/java', 'src/playstore/java']
-            res.srcDirs = ['src/main/res', 'src/playstore/res']
-            manifest.srcFile 'src/playstore/AndroidManifest.xml'
-        }
-    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
