@@ -433,6 +433,9 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
     private void initRecorder() {
         boolean mustRecAudio = false;
         try {
+            String audioBitRate = prefs.getString(getString(R.string.audiobitrate_key), "192");
+            String audioSamplingRate = prefs.getString(getString(R.string.audiosamplingrate_key), getBestSampleRate() + "");
+            String audioChannel = prefs.getString(getString(R.string.audiochannels_key), "1");
             switch (audioRecSource) {
                 case "1":
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -440,14 +443,16 @@ public class RecorderService extends Service implements ShakeEventManager.ShakeL
                     break;
                 case "2":
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
-                    mMediaRecorder.setAudioEncodingBitRate(320 * 1000);
-                    mMediaRecorder.setAudioSamplingRate(getBestSampleRate());
+                    mMediaRecorder.setAudioEncodingBitRate(Integer.parseInt(audioBitRate));
+                    mMediaRecorder.setAudioSamplingRate(Integer.parseInt(audioSamplingRate));
+                    mMediaRecorder.setAudioChannels(Integer.parseInt(audioChannel));
                     mustRecAudio = true;
                     break;
                 case "3":
                     mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.REMOTE_SUBMIX);
-                    mMediaRecorder.setAudioEncodingBitRate(320 * 1000);
-                    mMediaRecorder.setAudioSamplingRate(getBestSampleRate());
+                    mMediaRecorder.setAudioEncodingBitRate(Integer.parseInt(audioBitRate));
+                    mMediaRecorder.setAudioSamplingRate(Integer.parseInt(audioSamplingRate));
+                    mMediaRecorder.setAudioChannels(Integer.parseInt(audioChannel));
                     mustRecAudio = true;
                     break;
             }

@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -84,6 +85,21 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
      * ListPreference to manage audio recording via mic setting
      */
     private ListPreference recaudio;
+
+    /**
+     * ListPreference to set audio bit rate
+     */
+    private ListPreference audioBitrateList;
+
+    /**
+     * ListPreference to set number of audio channels
+     */
+    private ListPreference audioChannelsList;
+
+    /**
+     * ListPreference to set sampling rate for recorded audio
+     */
+    private ListPreference audioSamplingRateList;
 
     /**
      * CheckBoxPreference to manage onscreen floating control setting
@@ -162,6 +178,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         cameraOverlay = (CheckBoxPreference) findPreference(getString(R.string.preference_camera_overlay_key));
         systemUIDemo = (CheckBoxPreference) findPreference(getString(R.string.preference_sysui_demo_mode_key));
 
+        audioBitrateList = (ListPreference) findPreference(getString(R.string.audiobitrate_key));
+        audioChannelsList = (ListPreference) findPreference(getString(R.string.audiochannels_key));
+        audioSamplingRateList = (ListPreference) findPreference(getString(R.string.audiosamplingrate_key));
+
         Preference magiskDownload = findPreference(getString(R.string.preference_magisk_download_key));
         magiskDownload.setOnPreferenceClickListener(preference -> {
             Intent downloadURL = new Intent(Intent.ACTION_VIEW);
@@ -193,6 +213,8 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         filenameFormat.setSummary(getFileSaveFormat());
         filenamePrefix.setSummary(getValue(getString(R.string.fileprefix_key), "recording"));
 
+        setAudioSettingsSummary();
+
         checkAudioRecPermission();
 
         //If floating controls is checked, check for system windows permission
@@ -216,6 +238,13 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
 
         //set callback for directory change
         dirChooser.setOnDirectoryClickedListerner(this);
+    }
+
+    public int getBestSampleRate() {
+        AudioManager am = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+        String sampleRateString = am.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
+        int samplingRate = (sampleRateString == null) ? 44100 : Integer.parseInt(sampleRateString);
+        return samplingRate;
     }
 
     private void checkNativeRes(ListPreference res) {
@@ -360,6 +389,37 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
         return metrics;
     }
 
+    private void setAudioSettingsSummary() {
+        if (recaudio.getValue().equals("0") || recaudio.getValue().equals("1"))
+            disableAudioSettings();
+        else
+            enableAudioSettings();
+    }
+
+    private void enableAudioSettings() {
+        if (audioSamplingRateList.getEntry() == null)
+            audioSamplingRateList.setValue(getBestSampleRate() + "");
+
+        audioSamplingRateList.setSummary(audioSamplingRateList.getEntry());
+        audioChannelsList.setSummary(audioChannelsList.getEntry());
+        audioBitrateList.setSummary(audioBitrateList.getEntry());
+
+        audioSamplingRateList.setEnabled(true);
+        audioBitrateList.setEnabled(true);
+        audioChannelsList.setEnabled(true);
+    }
+
+
+    private void disableAudioSettings() {
+        audioSamplingRateList.setSummary(getString(R.string.preference_audio_settings_unavailable_summary));
+        audioBitrateList.setSummary(getString(R.string.preference_audio_settings_unavailable_summary));
+        audioChannelsList.setSummary(getString(R.string.preference_audio_settings_unavailable_summary));
+
+        audioSamplingRateList.setEnabled(false);
+        audioBitrateList.setEnabled(false);
+        audioChannelsList.setEnabled(false);
+    }
+
 
     /**
      * Get width of screen in pixels
@@ -482,6 +542,8 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                 break;
             case R.string.preference_audio_record_title:
                 switch (recaudio.getValue()) {
+                    case "0":
+                        break;
                     case "1":
                         requestAudioPermission(Const.AUDIO_REQUEST_CODE);
                         break;
@@ -507,6 +569,16 @@ public class SettingsPreferenceFragment extends PreferenceFragment implements Sh
                         recaudio.setValue("0");
                         break;
                 }
+                pref.setSummary(((ListPreference) pref).getEntry());
+                setAudioSettingsSummary();
+                break;
+            case R.string.preference_audio_bitrate_title:
+                pref.setSummary(((ListPreference) pref).getEntry());
+                break;
+            case R.string.preference_audio_channel_title:
+                pref.setSummary(((ListPreference) pref).getEntry());
+                break;
+            case R.string.preference_audio_sampling_rate_title:
                 pref.setSummary(((ListPreference) pref).getEntry());
                 break;
             case R.string.preference_filename_prefix_title:

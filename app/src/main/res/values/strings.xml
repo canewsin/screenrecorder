@@ -23,7 +23,7 @@
     <string name="preference_fps_summary">Choose fps to record at</string>
     <string name="preference_bit_title">Bit rate</string>
     <string name="preference_bit_summary">Choose bit rate</string>
-    <string name="preference_audio_record_title">Record audio</string>
+    <string name="preference_audio_record_title">Audio Source</string>
     <string name="preference_audio_record_summary">Records audio from mic along with screen video</string>
     <string name="preference_save_location_title">Save location</string>
     <string name="res_key" translatable="false">resolution</string>
@@ -163,6 +163,13 @@
     <string name="preference_sysui_demo_mode_key">sysui_demo</string>
     <string name="toast_msg_root_failed">Acquiring root access failed.</string>
     <string name="shortcut_storage_permission_request_title">Please grant Storage permission before using shortcut</string>
+    <string name="audiobitrate_key" translatable="false">audiobitrate</string>
+    <string name="audiochannels_key" translatable="false">audiochannels</string>
+    <string name="audiosamplingrate_key" translatable="false">audiosamplingrate</string>
+    <string name="preference_audio_bitrate_title">Audio Bitrate</string>
+    <string name="preference_audio_channel_title">Audio channel</string>
+    <string name="preference_audio_sampling_rate_title">Audio sampling rate</string>
+    <string name="preference_audio_settings_unavailable_summary">This setting is unavailable for the selected audio source</string>
     <plurals name="delete_alert_title">
         <item quantity="zero">Delete video?</item>
         <item quantity="one">Delete video?</item>

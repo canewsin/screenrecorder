@@ -59,6 +59,28 @@
             android:key="@string/audiorec_key"
             android:summary="@string/preference_audio_record_summary"
             android:title="@string/preference_audio_record_title" />
+
+        <ListPreference
+            android:defaultValue="192000"
+            android:entries="@array/audioBitRates"
+            android:entryValues="@array/audioBitRateValues"
+            android:key="@string/audiobitrate_key"
+            android:summary=""
+            android:title="@string/preference_audio_bitrate_title" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/audioChannels"
+            android:entryValues="@array/audioChannelValues"
+            android:key="@string/audiochannels_key"
+            android:summary=""
+            android:title="@string/preference_audio_channel_title" />
+        <ListPreference
+            android:entries="@array/audioSamplingRates"
+            android:entryValues="@array/audioSamplingRateValues"
+            android:key="@string/audiosamplingrate_key"
+            android:summary=""
+            android:title="@string/preference_audio_sampling_rate_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/prefs_category_save_options_title">
         <com.orpheusdroid.screenrecorder.folderpicker.FolderChooser
