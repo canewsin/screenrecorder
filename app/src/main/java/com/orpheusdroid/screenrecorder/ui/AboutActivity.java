@@ -80,7 +80,7 @@ public class AboutActivity extends AppCompatActivity {
         TextView iapLibrary = findViewById(R.id.iap_lib_credit_tv);
         TextView changelogLib = findViewById(R.id.changelog_lib_credit_tv);
 
-        iconCredit.setText(getString(R.string.app_icon_credit_Niko, "Niko Hörkkö", "http://nikosite.net"));
+        iconCredit.setText(getString(R.string.app_icon_credit_Niko, "Niko Hörkkö", "https://lumotypemedia.fi"));
         videoEditorCredit.setText(getString(R.string.video_editor_library_credit, "knowledge4life",
                 "https://github.com/knowledge4life/k4l-video-trimmer",
                 "MIT Opensource License"));
